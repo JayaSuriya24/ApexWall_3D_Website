@@ -8,20 +8,26 @@ import { siteConfig } from "@/config/site";
 export function CostEstimator() {
   const [width, setWidth] = useState(10);
   const [height, setHeight] = useState(10);
+  const [materialGrade, setMaterialGrade] = useState(2);
+  const [textureDepth, setTextureDepth] = useState(1);
 
   // Simplified pricing logic for the demo, using fixed multiplier
   const basePricePerSqFt = 150;
+  // Increase price based on material grade and texture depth
+  const gradeMultiplier = 1 + (materialGrade - 1) * 0.2; // e.g., Grade 1: 1x, Grade 2: 1.2x
+  const textureMultiplier = 1 + (textureDepth - 1) * 0.15;
   const area = width * height;
-  const estimatedMin = area * basePricePerSqFt;
-  const estimatedMax = area * (basePricePerSqFt + 50);
+  
+  const estimatedMin = Math.round(area * basePricePerSqFt * gradeMultiplier * textureMultiplier);
+  const estimatedMax = Math.round(area * (basePricePerSqFt + 50) * gradeMultiplier * textureMultiplier);
 
   const whatsappLink = `https://wa.me/${siteConfig.contact.whatsapp}?text=Hi%20ApexWall!%20I%20have%20a%20${width}ft%20x%20${height}ft%20wall%20and%20want%20to%20schedule%20a%20site%20consultation.`;
 
-  const renderSlider = (label: string, value: number, min: number, max: number, setter: (val: number) => void) => (
+  const renderSlider = (label: string, value: number, min: number, max: number, setter: (val: number) => void, unit: string = "") => (
     <div className="flex flex-col gap-4">
       <div className="flex justify-between items-center text-foreground font-medium">
         <span>{label}</span>
-        <span>{value} ft</span>
+        <span>{value}{unit ? ` ${unit}` : ""}</span>
       </div>
       <div className="relative w-full h-1 bg-card-border rounded-full">
         <input
@@ -59,10 +65,10 @@ export function CostEstimator() {
           
           {/* Left: Sliders (Representing the 4 sliders in Frame 7) */}
           <div className="flex flex-col gap-10">
-            {renderSlider("Wall Width", width, 5, 50, setWidth)}
-            {renderSlider("Wall Height", height, 5, 20, setHeight)}
-            {renderSlider("Material Grade", 2, 1, 3, () => {})}
-            {renderSlider("Texture Depth", 1, 1, 3, () => {})}
+            {renderSlider("Wall Width", width, 5, 50, setWidth, "ft")}
+            {renderSlider("Wall Height", height, 5, 20, setHeight, "ft")}
+            {renderSlider("Material Grade", materialGrade, 1, 3, setMaterialGrade, "Lvl")}
+            {renderSlider("Texture Depth", textureDepth, 1, 3, setTextureDepth, "Lvl")}
           </div>
 
           {/* Right: Output */}
