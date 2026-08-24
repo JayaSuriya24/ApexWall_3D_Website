@@ -1,0 +1,99 @@
+import type { Metadata } from "next";
+import { Space_Grotesk, Plus_Jakarta_Sans } from "next/font/google";
+import { siteConfig } from "@/config/site";
+import "./globals.css";
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: {
+    default: `${siteConfig.name} - Direct-to-Wall UV Printing`,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  keywords: [
+    "3D wall printing Trichy",
+    "direct to wall UV printing Tamil Nadu",
+    "wall printer machine",
+    "custom wall murals",
+    "UV printing Tiruchirappalli",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: siteConfig.name,
+    image: `${siteConfig.url}/og-image.jpg`,
+    "@id": siteConfig.url,
+    url: siteConfig.url,
+    telephone: siteConfig.contact.phone,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Tiruchirappalli",
+      addressRegion: "Tamil Nadu",
+      addressCountry: "IN",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: siteConfig.geo.latitude,
+      longitude: siteConfig.geo.longitude,
+    },
+    areaServed: siteConfig.areaServed.map((area) => ({
+      "@type": "City",
+      name: area,
+    })),
+    priceRange: "₹120 - ₹225 per sq.ft",
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ],
+      opens: "09:00",
+      closes: "18:00",
+    },
+  };
+
+  return (
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${plusJakartaSans.variable} h-full antialiased dark`}
+    >
+      <body className="min-h-full flex flex-col bg-background text-foreground bg-mesh">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {children}
+      </body>
+    </html>
+  );
+}
