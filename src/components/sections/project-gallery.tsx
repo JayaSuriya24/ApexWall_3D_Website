@@ -49,6 +49,18 @@ const PROJECTS = [
     category: "Commercial",
     image: "/images/gallery/commercial-3.png",
   },
+  {
+    id: 8,
+    title: "Vibrant Mexican Kitchen",
+    category: "Commercial",
+    image: "/images/gallery/commercial-4.jpg",
+  },
+  {
+    id: 9,
+    title: "Elegant Fine Dining",
+    category: "Commercial",
+    image: "/images/gallery/commercial-5.jpg",
+  },
 ];
 
 export function ProjectGallery() {
