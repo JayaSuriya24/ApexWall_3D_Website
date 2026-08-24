@@ -4,37 +4,53 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card } from "@/components/ui/card";
 
-const CATEGORIES = ["Residential", "Commercial", "Traditional"];
+const CATEGORIES = ["All", "Residential", "Commercial", "Traditional"];
 
 const PROJECTS = [
   {
     id: 1,
-    title: "3D Stucco Flower",
+    title: "Dark Floral Masterpiece",
     category: "Residential",
-    image: "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&q=80&w=800",
+    image: "/images/gallery/residential-1.jpg",
   },
   {
     id: 2,
+    title: "Botanical Fern Wall",
+    category: "Residential",
+    image: "/images/gallery/residential-2.jpg",
+  },
+  {
+    id: 3,
+    title: "Modern Geometric",
+    category: "Residential",
+    image: "/images/gallery/residential-3.jpg",
+  },
+  {
+    id: 4,
     title: "Rockfort Temple Mural",
     category: "Traditional",
     image: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&q=80&w=800",
   },
   {
-    id: 3,
+    id: 5,
     title: "Gold World Map",
     category: "Commercial",
     image: "https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=800",
   },
   {
-    id: 4,
-    title: "Sculptural Art",
-    category: "Residential",
-    image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=800",
+    id: 6,
+    title: "Sculptural Arch",
+    category: "Commercial",
+    image: "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=800",
   },
 ];
 
 export function ProjectGallery() {
   const [activeCategory, setActiveCategory] = useState("Residential");
+
+  const filteredProjects = activeCategory === "All" 
+    ? PROJECTS 
+    : PROJECTS.filter((p) => p.category === activeCategory);
 
   return (
     <section id="gallery" className="py-20 md:py-32 relative bg-background px-6">
@@ -62,10 +78,10 @@ export function ProjectGallery() {
           ))}
         </div>
 
-        {/* 4-Item Grid */}
+        {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl">
           <AnimatePresence mode="popLayout">
-            {PROJECTS.map((project) => (
+            {filteredProjects.map((project) => (
               <motion.div
                 layout
                 key={project.id}
