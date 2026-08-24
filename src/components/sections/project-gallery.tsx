@@ -33,15 +33,21 @@ const PROJECTS = [
   },
   {
     id: 5,
-    title: "Gold World Map",
+    title: "Cafe Wicker Art",
     category: "Commercial",
-    image: "https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=800",
+    image: "/images/gallery/commercial-1.jpg",
   },
   {
     id: 6,
-    title: "Sculptural Arch",
+    title: "Sculpted Wood Wall",
     category: "Commercial",
-    image: "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=800",
+    image: "/images/gallery/commercial-2.jpg",
+  },
+  {
+    id: 7,
+    title: "Line Art Barista",
+    category: "Commercial",
+    image: "/images/gallery/commercial-3.png",
   },
 ];
 
