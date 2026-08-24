@@ -1,112 +1,92 @@
-"use client";
+import { Check, X } from "lucide-react";
+import { Card } from "@/components/ui/card";
 
-import { motion } from "framer-motion";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { CheckCircle2, XCircle, AlertTriangle } from "lucide-react";
-import { cn } from "@/lib/utils";
-
-const COMPARISON_DATA = [
+const COMPARISONS = [
   {
     feature: "Durability",
-    apex: { text: "10+ years indoor, fade-proof", type: "pro" },
-    wallpaper: { text: "2–4 years, peels at edges", type: "con" },
-    painting: { text: "3–5 years, dust & fading", type: "warn" },
+    direct: "10+ Years (Fade Resistant)",
+    wallpaper: "2-4 Years (Prone to Peeling)",
   },
   {
-    feature: "Execution Speed",
-    apex: { text: "2–4 hours", type: "pro" },
-    wallpaper: { text: "1–2 days", type: "warn" },
-    painting: { text: "1–2 weeks", type: "con" },
+    feature: "Surface",
+    direct: "Concrete, Wood, Brick, Glass",
+    wallpaper: "Smooth Plaster Only",
   },
   {
-    feature: "Surface Versatility",
-    apex: { text: "Concrete, brick, wood, glass, metal, tile", type: "pro" },
-    wallpaper: { text: "Only flat primed walls", type: "con" },
-    painting: { text: "Plaster only", type: "warn" },
+    feature: "Finish",
+    direct: "Matte / Gloss (Textured Effect)",
+    wallpaper: "Flat Printed Paper",
   },
   {
-    feature: "Water & Scratch Resistance",
-    apex: { text: "100% waterproof, UV-cured", type: "pro" },
-    wallpaper: { text: "Damaged by moisture", type: "con" },
-    painting: { text: "Prone to smudging & scratching", type: "con" },
+    feature: "Installation Time",
+    direct: "2-4 Hours (Zero Mess)",
+    wallpaper: "1-2 Days (Glue & Mess)",
   },
   {
-    feature: "Seams & Bubbles",
-    apex: { text: "Zero seams, continuous print", type: "pro" },
-    wallpaper: { text: "Visible joints & air bubbles", type: "con" },
-    painting: { text: "Seamless", type: "pro" },
-  },
-  {
-    feature: "Custom Sizing",
-    apex: { text: "Any dimension, edge-to-edge", type: "pro" },
-    wallpaper: { text: "Roll-width constrained", type: "con" },
-    painting: { text: "Any dimension", type: "pro" },
+    feature: "Eco-Friendly",
+    direct: "Yes (UV Inks)",
+    wallpaper: "No (Chemical Glues)",
   },
 ];
 
-const renderIcon = (type: string) => {
-  if (type === "pro") return <CheckCircle2 className="w-5 h-5 text-success shrink-0" />;
-  if (type === "con") return <XCircle className="w-5 h-5 text-destructive text-red-400 shrink-0" />;
-  return <AlertTriangle className="w-5 h-5 text-yellow-400 shrink-0" />;
-};
-
 export function ComparisonMatrix() {
   return (
-    <section id="why-us" className="py-20 md:py-32 relative">
-      <div className="mx-auto max-w-7xl px-4 md:px-6 relative z-10">
-        <SectionHeading
-          title="The Superior Wall Finish."
-          subtitle="See why homeowners and businesses in Trichy are ditching wallpaper and manual painting."
-        />
+    <section id="why-us" className="py-20 md:py-32 bg-background px-6">
+      <div className="mx-auto max-w-5xl flex flex-col items-center text-center">
+        
+        <h2 className="font-display font-semibold text-4xl md:text-5xl text-foreground mb-4">
+          Comparison Matrix
+        </h2>
+        <p className="text-muted text-lg mb-16">Sophisticated Table</p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          className="relative w-full overflow-x-auto pb-6"
-        >
-          <div className="min-w-[800px] w-full grid grid-cols-4 gap-4 p-4 surface-glass rounded-3xl">
-            {/* Headers */}
-            <div className="p-4 flex items-end">
-              <span className="text-muted font-medium">Feature</span>
-            </div>
-            <div className="p-4 rounded-t-2xl bg-primary/10 border-t border-x border-primary/30 flex items-end relative overflow-hidden">
-              <div className="absolute top-0 inset-x-0 h-1 bg-primary glow-curing" />
-              <span className="text-primary font-display font-bold text-lg">ApexWall 3D UV</span>
-            </div>
-            <div className="p-4 flex items-end">
-              <span className="text-foreground font-display font-semibold">Custom Wallpaper</span>
-            </div>
-            <div className="p-4 flex items-end">
-              <span className="text-foreground font-display font-semibold">Manual Painting</span>
-            </div>
-
-            {/* Rows */}
-            {COMPARISON_DATA.map((row, i) => (
-              <div key={row.feature} className="col-span-4 grid grid-cols-4 gap-4">
-                {/* Feature Name */}
-                <div className={cn("p-4 flex items-center border-t border-white/5", i === COMPARISON_DATA.length - 1 && "rounded-bl-2xl")}>
-                  <span className="font-semibold text-foreground">{row.feature}</span>
-                </div>
-                {/* ApexWall Column */}
-                <div className={cn("p-4 flex items-center gap-3 bg-primary/5 border-x border-primary/20", i === COMPARISON_DATA.length - 1 && "rounded-b-2xl border-b pb-5")}>
-                  {renderIcon(row.apex.type)}
-                  <span className="text-foreground font-medium text-sm md:text-base">{row.apex.text}</span>
-                </div>
-                {/* Wallpaper Column */}
-                <div className="p-4 flex items-center gap-3 border-t border-white/5">
-                  {renderIcon(row.wallpaper.type)}
-                  <span className="text-muted text-sm md:text-base">{row.wallpaper.text}</span>
-                </div>
-                {/* Painting Column */}
-                <div className="p-4 flex items-center gap-3 border-t border-white/5">
-                  {renderIcon(row.painting.type)}
-                  <span className="text-muted text-sm md:text-base">{row.painting.text}</span>
-                </div>
-              </div>
-            ))}
+        <Card className="w-full p-0 overflow-hidden bg-card-bg rounded-[24px]">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr>
+                  <th className="p-6 md:p-8 font-display font-semibold text-xl text-foreground border-b border-card-border w-1/3">
+                    Feature
+                  </th>
+                  <th className="p-6 md:p-8 font-display font-semibold text-xl text-foreground bg-highlight-peach/50 border-b border-card-border w-1/3 text-center">
+                    Direct-to-Wall Printing
+                  </th>
+                  <th className="p-6 md:p-8 font-display font-semibold text-xl text-foreground border-b border-card-border w-1/3 text-center">
+                    Custom Wallpaper
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {COMPARISONS.map((row, i) => (
+                  <tr key={i} className="group hover:bg-black/[0.02] transition-colors">
+                    <td className="p-6 md:p-8 font-medium text-foreground border-b border-card-border">
+                      {row.feature}
+                    </td>
+                    
+                    {/* Highlighted Column */}
+                    <td className="p-6 md:p-8 text-center bg-highlight-peach border-b border-white/50 relative">
+                      <div className="flex flex-col items-center justify-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-success/20 flex items-center justify-center mb-1">
+                          <Check className="w-5 h-5 text-success" strokeWidth={3} />
+                        </div>
+                        <span className="text-sm font-semibold text-foreground">{row.direct}</span>
+                      </div>
+                    </td>
+                    
+                    <td className="p-6 md:p-8 text-center border-b border-card-border">
+                      <div className="flex flex-col items-center justify-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center mb-1">
+                          <X className="w-5 h-5 text-red-500" strokeWidth={3} />
+                        </div>
+                        <span className="text-sm text-muted">{row.wallpaper}</span>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        </motion.div>
+        </Card>
+
       </div>
     </section>
   );

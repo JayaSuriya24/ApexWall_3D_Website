@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { GlassCard } from "@/components/ui/glass-card";
+import { Card } from "@/components/ui/card";
 import { Star, ShieldCheck, Leaf, Factory } from "lucide-react";
 
 const TESTIMONIALS = [
@@ -37,15 +36,19 @@ const TRUST_MARKS = [
 
 export function Testimonials() {
   return (
-    <section className="py-20 md:py-32 relative">
-      <div className="mx-auto max-w-7xl px-4 md:px-6 relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16">
-          <SectionHeading
-            title="Trusted Across Trichy."
-            subtitle="Don't just take our word for it. See what our clients have to say about the ApexWall finish."
-            centered={false}
-            className="mb-0 md:mb-0"
-          />
+    <section className="py-20 md:py-32 relative bg-background px-6">
+      <div className="mx-auto max-w-7xl flex flex-col items-center">
+        
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 w-full mb-12 md:mb-16">
+          <div className="flex flex-col max-w-2xl">
+            <h2 className="font-display font-semibold text-4xl md:text-5xl text-foreground mb-4">
+              Trusted Across Trichy.
+            </h2>
+            <p className="text-muted text-lg">
+              Don't just take our word for it. See what our clients have to say about the ApexWall finish.
+            </p>
+          </div>
+          
           {/* Google Review Badge */}
           <div className="flex flex-col items-start md:items-end gap-2 shrink-0">
             <div className="flex items-center gap-1">
@@ -60,7 +63,7 @@ export function Testimonials() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
+        <div className="grid md:grid-cols-3 gap-6 w-full mb-16">
           {TESTIMONIALS.map((testimonial, i) => (
             <motion.div
               key={testimonial.name}
@@ -68,8 +71,9 @@ export function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="h-full"
             >
-              <GlassCard className="h-full flex flex-col gap-6">
+              <Card className="h-full flex flex-col gap-6">
                 <div className="flex items-center gap-1">
                   {[...Array(testimonial.rating)].map((_, j) => (
                     <Star key={j} className="w-4 h-4 text-primary fill-primary" />
@@ -78,19 +82,19 @@ export function Testimonials() {
                 <p className="text-muted italic flex-1">"{testimonial.text}"</p>
                 <div>
                   <h4 className="text-foreground font-bold font-display">{testimonial.name}</h4>
-                  <p className="text-xs text-white/50">{testimonial.location} · {testimonial.project}</p>
+                  <p className="text-xs text-muted">{testimonial.location} · {testimonial.project}</p>
                 </div>
-              </GlassCard>
+              </Card>
             </motion.div>
           ))}
         </div>
 
         {/* Trust Strip */}
-        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 py-8 border-y border-white/10 bg-black/20">
+        <div className="flex flex-wrap w-full items-center justify-center gap-8 md:gap-16 py-8 border-y border-card-border bg-card-bg rounded-2xl">
           {TRUST_MARKS.map((mark) => (
             <div key={mark.text} className="flex items-center gap-3">
               <mark.icon className="w-5 h-5 text-primary" />
-              <span className="text-sm font-medium tracking-wide text-white/80 uppercase">{mark.text}</span>
+              <span className="text-sm font-medium tracking-wide text-muted uppercase">{mark.text}</span>
             </div>
           ))}
         </div>

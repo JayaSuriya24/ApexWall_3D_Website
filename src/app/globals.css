@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #080B10;
-  --foreground: #F8FAFC;
-  --muted: #94A3B8;
+  --background: #FAF7F2;
+  --foreground: #1C1A17;
+  --muted: #6E685E;
   
-  --primary: #00F0FF;
-  --secondary: #D946EF;
-  --success: #10B981;
+  --primary: #C19B76; /* Bronze Accent */
+  --secondary: #E3D5C8;
+  --success: #8BA888;
+  --highlight-peach: #F5ECE1;
 
-  --surface-glass-bg: rgba(15, 23, 42, 0.65);
-  --surface-glass-border: rgba(255, 255, 255, 0.1);
+  --card-bg: #FFFFFF;
+  --card-border: #ECE5D8;
 }
 
 @theme inline {
@@ -20,34 +21,43 @@
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-success: var(--success);
+  --color-highlight: var(--highlight-peach);
 
-  --color-surface-glass-bg: var(--surface-glass-bg);
-  --color-surface-glass-border: var(--surface-glass-border);
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
 
-  --font-display: var(--font-space-grotesk), "Syne", "Clash Display", sans-serif;
-  --font-sans: var(--font-plus-jakarta-sans), "Inter", sans-serif;
+  --font-display: var(--font-playfair-display), "Cormorant Garamond", "Georgia", serif;
+  --font-sans: var(--font-plus-jakarta-sans), "Helvetica Neue", sans-serif;
 }
 
-@layer utilities {
-  .bg-mesh {
-    background-image: 
-      radial-gradient(circle at 15% 50%, rgba(0, 240, 255, 0.08), transparent 25%),
-      radial-gradient(circle at 85% 30%, rgba(217, 70, 239, 0.08), transparent 25%);
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  .surface-glass {
-    background-color: var(--surface-glass-bg);
-    backdrop-filter: blur(24px);
-    border: 1px solid var(--surface-glass-border);
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
   }
-  .surface-elevated {
-    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+
+  /* Lenis smooth scrolling base */
+  html.lenis {
+    height: auto;
   }
-  .glow-curing {
-    box-shadow: 0 0 25px -5px rgba(0, 240, 255, 0.45);
+  .lenis.lenis-smooth {
+    scroll-behavior: auto;
   }
-  .text-glow {
-    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
   }
 }
 

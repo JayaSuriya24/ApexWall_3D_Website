@@ -2,93 +2,84 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { MonitorSmartphone, Ruler, Printer, Sparkles } from "lucide-react";
 
 const STEPS = [
   {
-    num: "01",
-    title: "Digital Mockup & Sizing",
-    description: "Upload your 4K image or choose from our 5,000+ mural library. We generate a 3D digital preview on a photo of your actual room.",
-    icon: MonitorSmartphone,
+    id: 1,
+    title: "Site Inspection & Measurement",
+    description: "Our experts visit your location to measure the wall and assess surface readiness.",
   },
   {
-    num: "02",
-    title: "Free Surface & Moisture Check",
-    description: "Our technician visits your site in Trichy or surrounds to inspect wall leveling, dampness, and surface compatibility.",
-    icon: Ruler,
+    id: 2,
+    title: "Design Mockup & Approval",
+    description: "We create a 3D digital preview of your chosen artwork on your actual wall.",
   },
   {
-    num: "03",
-    title: "Precision Robotic Printing",
-    description: "Rails assemble in 20 minutes. Dual Epson i3200 printheads deposit UV ink with micron accuracy at 20–50 sq. ft./hour.",
-    icon: Printer,
+    id: 3,
+    title: "Machine Setup & Calibration",
+    description: "The robotic UV printer is aligned perfectly parallel to your wall.",
   },
   {
-    num: "04",
-    title: "Instant UV Curing & Handover",
-    description: "Built-in UV-LED cures every droplet on contact. 100% dry to touch, non-toxic, and completely odorless immediately.",
-    icon: Sparkles,
+    id: 4,
+    title: "Direct Printing & Curing",
+    description: "Flawless, instantly-cured printing with zero mess or downtime.",
   },
 ];
 
 export function HowItWorks() {
-  const containerRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start center", "end center"],
   });
 
-  // For desktop horizontal line
-  const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  // For mobile vertical line
-  const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section ref={containerRef} id="process" className="py-20 md:py-32 relative">
-      <div className="mx-auto max-w-7xl px-4 md:px-6 relative z-10">
-        <SectionHeading
-          title="How It Works."
-          subtitle="A seamless 4-step process from digital concept to permanent 4K reality."
-        />
+    <section id="process" className="py-20 md:py-32 bg-background px-6">
+      <div className="mx-auto max-w-4xl flex flex-col items-center">
+        
+        <h2 className="font-display font-semibold text-4xl md:text-5xl text-foreground mb-20">
+          Process Timeline
+        </h2>
 
-        <div className="relative mt-16 md:mt-24">
-          {/* Desktop Horizontal Track */}
-          <div className="hidden md:block absolute top-12 left-0 right-0 h-1 bg-white/10 rounded-full overflow-hidden">
-            <motion.div
-              className="absolute inset-y-0 left-0 bg-primary glow-curing origin-left"
-              style={{ scaleX }}
-            />
-          </div>
+        <div className="relative w-full" ref={containerRef}>
+          {/* Background Line */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-card-border -translate-x-1/2" />
+          
+          {/* Animated Fill Line */}
+          <motion.div 
+            className="absolute left-1/2 top-0 w-[2px] bg-primary -translate-x-1/2 origin-top"
+            style={{ height: lineHeight }}
+          />
 
-          {/* Mobile Vertical Track */}
-          <div className="md:hidden absolute top-0 bottom-0 left-8 w-1 bg-white/10 rounded-full overflow-hidden">
-            <motion.div
-              className="absolute inset-x-0 top-0 bg-primary glow-curing origin-top"
-              style={{ scaleY }}
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-6 relative z-10">
-            {STEPS.map((step, index) => (
-              <div key={step.num} className="relative flex md:flex-col gap-6 md:gap-8 group">
-                {/* Node Icon */}
-                <div className="relative w-16 h-16 md:w-24 md:h-24 md:mx-auto rounded-full bg-background border-2 border-white/10 flex items-center justify-center shrink-0 transition-colors duration-500 group-hover:border-primary group-hover:glow-curing z-10">
-                  <step.icon className="w-6 h-6 md:w-8 md:h-8 text-muted group-hover:text-primary transition-colors" />
+          <div className="flex flex-col gap-24 relative z-10">
+            {STEPS.map((step, index) => {
+              const isEven = index % 2 === 0;
+              return (
+                <div key={step.id} className="relative flex items-center justify-center w-full">
                   
-                  {/* Step Number Badge */}
-                  <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-xs font-bold font-mono text-white border border-white/20">
-                    {step.num}
+                  {/* Content (Alternating) */}
+                  <div className={`w-1/2 px-8 md:px-12 ${isEven ? 'text-right pr-12 md:pr-16 ml-auto order-1' : 'text-left pl-12 md:pl-16 mr-auto order-2'}`}>
+                    <h3 className="font-display font-semibold text-xl md:text-2xl text-foreground mb-2">
+                      {step.title}
+                    </h3>
+                    <p className="text-muted text-sm md:text-base">
+                      {step.description}
+                    </p>
                   </div>
-                </div>
 
-                {/* Content */}
-                <div className="flex flex-col md:text-center md:items-center pt-2 md:pt-0">
-                  <h3 className="text-xl font-display font-bold text-foreground mb-3">{step.title}</h3>
-                  <p className="text-muted text-sm leading-relaxed max-w-xs">{step.description}</p>
+                  {/* Number Pill (Center) */}
+                  <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-background border-[4px] border-card-border shadow-sm">
+                    <span className="font-display font-bold text-xl md:text-2xl text-primary">
+                      {step.id}
+                    </span>
+                  </div>
+
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

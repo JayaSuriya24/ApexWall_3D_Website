@@ -1,222 +1,101 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Card } from "@/components/ui/card";
+import { PillButton } from "@/components/ui/pill-button";
 import { siteConfig } from "@/config/site";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { GlassCard } from "@/components/ui/glass-card";
-import { GlowButton } from "@/components/ui/glow-button";
-import { 
-  MapPin, 
-  Phone, 
-  Mail, 
-  MessageCircle, 
-  UploadCloud,
-  CheckCircle2,
-  Clock
-} from "lucide-react";
 
 export function Footer() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [fileName, setFileName] = useState<string | null>(null);
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFileName(e.target.files[0].name);
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      setTimeout(() => setIsSuccess(false), 5000);
-    }, 1500);
-  };
-
   return (
-    <footer id="contact" className="pt-20 md:pt-32 relative bg-black/40 border-t border-white/5">
-      <div className="mx-auto max-w-7xl px-4 md:px-6 relative z-10 mb-20 md:mb-32">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+    <footer id="contact" className="pt-20 md:pt-32 pb-12 bg-background px-6 border-t border-card-border">
+      <div className="mx-auto max-w-6xl">
+        
+        <div className="text-center mb-16">
+          <h2 className="font-display font-semibold text-3xl md:text-4xl text-foreground">
+            Central Tamil Nadu's Premier <br className="hidden md:block"/> Wall Printing Service
+          </h2>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start mb-24">
           
-          {/* Contact Details & Map */}
-          <div className="flex flex-col gap-10">
-            <div>
-              <SectionHeading
-                title="Let's Talk Walls."
-                subtitle="Book your free site inspection anywhere in the Trichy region."
-                centered={false}
-                className="mb-8"
+          {/* Form */}
+          <div className="flex flex-col gap-6">
+            <h3 className="font-semibold text-foreground text-lg mb-2">Service Area</h3>
+            <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
+              <input 
+                type="text" 
+                placeholder="Name" 
+                className="w-full bg-card-bg border border-card-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted/60 focus:outline-none focus:border-primary transition-colors" 
               />
-              
-              <div className="grid sm:grid-cols-2 gap-6 mb-8">
-                <a href={`tel:${siteConfig.contact.phone}`} className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors border border-white/5">
-                  <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-                    <Phone className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <span className="block text-xs uppercase text-muted font-semibold mb-1">Call Us</span>
-                    <span className="text-foreground font-medium">{siteConfig.contact.phone}</span>
-                  </div>
-                </a>
-                
-                <a href={`https://wa.me/${siteConfig.contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex items-start gap-4 p-4 rounded-2xl bg-success/10 hover:bg-success/20 transition-colors border border-success/20">
-                  <div className="w-10 h-10 rounded-full bg-success/20 flex items-center justify-center shrink-0">
-                    <MessageCircle className="w-5 h-5 text-success" />
-                  </div>
-                  <div>
-                    <span className="block text-xs uppercase text-success/80 font-semibold mb-1">WhatsApp</span>
-                    <span className="text-foreground font-medium">Instant Chat</span>
-                  </div>
-                </a>
-              </div>
-
-              <div className="flex items-start gap-4 mb-6 text-muted">
-                <MapPin className="w-5 h-5 shrink-0 text-primary mt-1" />
-                <div>
-                  <span className="text-foreground font-medium block mb-1">Headquarters</span>
-                  {siteConfig.address}
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-4 text-muted">
-                <Clock className="w-5 h-5 shrink-0 text-primary mt-1" />
-                <div>
-                  <span className="text-foreground font-medium block mb-1">Business Hours</span>
-                  Mon - Sat: 9:00 AM - 6:00 PM <br/> Sunday: Closed
-                </div>
-              </div>
-            </div>
-
-            {/* Embedded Map */}
-            <div className="w-full aspect-video rounded-2xl overflow-hidden border border-white/10 relative filter grayscale hover:grayscale-0 transition-all duration-700">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125406.10775836262!2d78.61869811910557!3d10.815835695027581!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baaf50ff2aec587%3A0x112115994081c70e!2sTiruchirappalli%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                allowFullScreen={true} 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Tiruchirappalli Map"
-                className="absolute inset-0"
+              <input 
+                type="email" 
+                placeholder="Email" 
+                className="w-full bg-card-bg border border-card-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted/60 focus:outline-none focus:border-primary transition-colors" 
               />
+              <textarea 
+                rows={4} 
+                placeholder="Message" 
+                className="w-full bg-card-bg border border-card-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted/60 focus:outline-none focus:border-primary transition-colors resize-none" 
+              />
+              <PillButton type="submit" variant="outline" className="w-full mt-2">
+                Submit
+              </PillButton>
+            </form>
+          </div>
+
+          {/* Map */}
+          <div className="w-full aspect-square md:aspect-[4/5] rounded-[24px] overflow-hidden border border-card-border relative grayscale hover:grayscale-0 transition-all duration-700">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125406.10775836262!2d78.61869811910557!3d10.815835695027581!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baaf50ff2aec587%3A0x112115994081c70e!2sTiruchirappalli%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen={true} 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Tiruchirappalli Map"
+              className="absolute inset-0"
+            />
+          </div>
+        </div>
+
+        {/* Footer Bottom Strip */}
+        <div className="flex flex-col md:flex-row items-end justify-between gap-12 border-t border-card-border pt-12">
+          
+          <div className="flex flex-col gap-2">
+            <h4 className="font-semibold text-foreground text-sm uppercase tracking-wider mb-2">Contact details</h4>
+            <p className="text-muted text-sm">{siteConfig.address}</p>
+            <p className="text-muted text-sm">info@apexwall3d.com</p>
+            <p className="text-muted text-sm">instagram.com/apexwall3d</p>
+            <div className="flex gap-4 mt-4 text-muted">
+              {/* FB SVG */}
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 hover:text-foreground cursor-pointer transition-colors"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              {/* IG SVG */}
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 hover:text-foreground cursor-pointer transition-colors"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              {/* YT SVG */}
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 hover:text-foreground cursor-pointer transition-colors"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
             </div>
           </div>
 
-          {/* Lead Gen Form */}
-          <GlassCard elevated className="h-fit">
-            <h3 className="font-display font-bold text-2xl text-foreground mb-2">Request a Quote</h3>
-            <p className="text-muted text-sm mb-8">Upload a photo of your wall for a faster, more accurate 3D mockup and estimate.</p>
-
-            <AnimatePresence mode="wait">
-              {isSuccess ? (
-                <motion.div
-                  key="success"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  className="flex flex-col items-center justify-center py-12 text-center"
-                >
-                  <div className="w-16 h-16 rounded-full bg-success/20 flex items-center justify-center mb-6">
-                    <CheckCircle2 className="w-8 h-8 text-success" />
-                  </div>
-                  <h4 className="font-display font-bold text-xl text-foreground mb-2">Request Received!</h4>
-                  <p className="text-muted">We'll review your details and contact you via WhatsApp within 2 hours.</p>
-                </motion.div>
-              ) : (
-                <motion.form
-                  key="form"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  onSubmit={handleSubmit}
-                  className="flex flex-col gap-5"
-                >
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    <div className="flex flex-col gap-2">
-                      <label htmlFor="name" className="text-xs uppercase text-muted font-semibold tracking-wide">Name *</label>
-                      <input id="name" required type="text" className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors" />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <label htmlFor="phone" className="text-xs uppercase text-muted font-semibold tracking-wide">WhatsApp No. *</label>
-                      <input id="phone" required type="tel" className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors" />
-                    </div>
-                  </div>
-
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    <div className="flex flex-col gap-2">
-                      <label htmlFor="city" className="text-xs uppercase text-muted font-semibold tracking-wide">City/Area *</label>
-                      <input id="city" required type="text" placeholder="e.g. Thillai Nagar" className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors" />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <label htmlFor="surface" className="text-xs uppercase text-muted font-semibold tracking-wide">Wall Surface</label>
-                      <select id="surface" className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors appearance-none">
-                        <option value="emulsion">Smooth Emulsion</option>
-                        <option value="brick">Bare Brick / Plaster</option>
-                        <option value="wood">Wood / MDF</option>
-                        <option value="glass">Glass / Tile</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-2">
-                    <label className="text-xs uppercase text-muted font-semibold tracking-wide">Upload Wall Photo</label>
-                    <div className="relative w-full border-2 border-dashed border-white/10 rounded-xl p-6 flex flex-col items-center justify-center text-center hover:border-primary/50 transition-colors bg-white/5">
-                      <input 
-                        type="file" 
-                        accept="image/*" 
-                        onChange={handleFileChange}
-                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
-                      />
-                      <UploadCloud className="w-8 h-8 text-primary mb-3" />
-                      {fileName ? (
-                        <span className="text-sm text-foreground font-medium">{fileName}</span>
-                      ) : (
-                        <>
-                          <span className="text-sm text-foreground font-medium mb-1">Click to upload or drag and drop</span>
-                          <span className="text-xs text-muted">JPEG, PNG up to 10MB</span>
-                        </>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="message" className="text-xs uppercase text-muted font-semibold tracking-wide">Project Details / Size (Optional)</label>
-                    <textarea id="message" rows={3} className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors resize-none" />
-                  </div>
-
-                  <GlowButton type="submit" disabled={isSubmitting} className="w-full mt-2">
-                    {isSubmitting ? "Submitting..." : "Get Free Quote & Mockup"}
-                  </GlowButton>
-                </motion.form>
-              )}
-            </AnimatePresence>
-          </GlassCard>
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center justify-between">
+              <h4 className="font-semibold text-foreground text-sm uppercase tracking-wider">Instagram</h4>
+              <span className="text-primary text-sm font-medium cursor-pointer">See all</span>
+            </div>
+            <div className="flex gap-3">
+              {[
+                "https://images.unsplash.com/photo-1518599904199-0ca897819ddb?w=200&h=200&fit=crop",
+                "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=200&h=200&fit=crop",
+                "https://images.unsplash.com/photo-1600607686527-6fb886090705?w=200&h=200&fit=crop",
+              ].map((img, i) => (
+                <div key={i} className="w-20 h-20 rounded-xl overflow-hidden border border-card-border">
+                  <img src={img} alt="Instagram preview" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500 cursor-pointer" />
+                </div>
+              ))}
+            </div>
+          </div>
 
         </div>
-      </div>
 
-      {/* Footer Bottom Strip */}
-      <div className="border-t border-white/5">
-        <div className="mx-auto max-w-7xl px-4 md:px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="font-display font-bold text-lg tracking-tight text-white">
-              ApexWall<span className="text-primary">3D</span>
-            </span>
-          </div>
-          <p className="text-muted text-sm text-center md:text-left">
-            © {new Date().getFullYear()} {siteConfig.name}. All rights reserved. Servicing Trichy & Central Tamil Nadu.
-          </p>
-          <div className="flex items-center gap-6 text-sm text-muted">
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
-          </div>
-        </div>
       </div>
     </footer>
   );
