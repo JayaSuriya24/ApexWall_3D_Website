@@ -23,24 +23,42 @@ export function CostEstimator() {
 
   const whatsappLink = `https://wa.me/${siteConfig.contact.whatsapp}?text=Hi%20ApexWall!%20I%20have%20a%20${width}ft%20x%20${height}ft%20wall%20and%20want%20to%20schedule%20a%20site%20consultation.`;
 
-  const renderSlider = (label: string, value: number, min: number, max: number, setter: (val: number) => void, unit: string = "") => (
+  const renderSlider = (label: string, value: number, min: number, max: number, setter: (val: number) => void, unit: string = "", steps?: number) => (
     <div className="flex flex-col gap-4">
       <div className="flex justify-between items-center text-foreground font-medium">
         <span>{label}</span>
         <span>{value}{unit ? ` ${unit}` : ""}</span>
       </div>
       <div className="relative w-full h-1 bg-card-border rounded-full">
+        {/* Step Indicator Dots */}
+        {steps && (
+          <div className="absolute inset-0 pointer-events-none">
+            {Array.from({ length: steps }).map((_, i) => (
+              <div 
+                key={i} 
+                className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full transition-colors ${
+                  value >= min + (i * ((max - min) / (steps - 1))) ? 'bg-primary' : 'bg-muted/30'
+                }`}
+                style={{ 
+                  left: `${(i / (steps - 1)) * 100}%`, 
+                  transform: 'translate(-50%, -50%)' 
+                }}
+              />
+            ))}
+          </div>
+        )}
         <input
           type="range"
           min={min}
           max={max}
+          step={steps ? (max - min) / (steps - 1) : 1}
           value={value}
           onChange={(e) => setter(Number(e.target.value))}
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20"
         />
         {/* Fill Track */}
         <div 
-          className="absolute top-0 left-0 h-full bg-primary rounded-full z-10" 
+          className="absolute top-0 left-0 h-full bg-primary rounded-full z-10 pointer-events-none" 
           style={{ width: `${((value - min) / (max - min)) * 100}%` }}
         />
         {/* Bronze Knob */}
@@ -67,8 +85,8 @@ export function CostEstimator() {
           <div className="flex flex-col gap-10">
             {renderSlider("Wall Width", width, 5, 50, setWidth, "ft")}
             {renderSlider("Wall Height", height, 5, 20, setHeight, "ft")}
-            {renderSlider("Material Grade", materialGrade, 1, 3, setMaterialGrade, "Lvl")}
-            {renderSlider("Texture Depth", textureDepth, 1, 3, setTextureDepth, "Lvl")}
+            {renderSlider("Material Grade", materialGrade, 1, 3, setMaterialGrade, "Lvl", 3)}
+            {renderSlider("Texture Depth", textureDepth, 1, 3, setTextureDepth, "Lvl", 3)}
           </div>
 
           {/* Right: Output */}
