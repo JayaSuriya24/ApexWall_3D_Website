@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card } from "@/components/ui/card";
 
-const CATEGORIES = ["All", "Residential", "Commercial", "Traditional"];
+const CATEGORIES = ["All", "Residential", "Commercial", "Traditional", "Clinics & Schools"];
 
 const PROJECTS = [
   {
@@ -60,6 +60,24 @@ const PROJECTS = [
     title: "Elegant Fine Dining",
     category: "Commercial",
     image: "/images/gallery/commercial-5.jpg",
+  },
+  {
+    id: 10,
+    title: "Pediatric Waiting Area",
+    category: "Clinics & Schools",
+    image: "/images/gallery/clinic-1.jpg",
+  },
+  {
+    id: 11,
+    title: "School Playroom",
+    category: "Clinics & Schools",
+    image: "/images/gallery/clinic-2.jpg",
+  },
+  {
+    id: 12,
+    title: "Dental Office Rainforest",
+    category: "Clinics & Schools",
+    image: "/images/gallery/clinic-3.jpg",
   },
 ];
 
