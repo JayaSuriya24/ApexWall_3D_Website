@@ -69,10 +69,30 @@ export function Hero() {
   }, [isDragging]);
 
   return (
-    <section className="relative min-h-[100dvh] pt-28 pb-12 md:pb-16 flex flex-col items-center justify-center bg-background px-6">
+    <section className="relative min-h-[100dvh] pt-28 pb-12 md:pb-16 flex flex-col items-center justify-center bg-background px-6 overflow-hidden">
       
+      {/* Background Watermarks */}
+      <div className="absolute inset-0 pointer-events-none select-none z-0">
+        <div className="absolute top-20 -left-10 opacity-[0.02] font-display text-8xl md:text-[12rem] font-bold text-foreground whitespace-nowrap -rotate-6">
+          Direct-to-Wall
+        </div>
+        <img 
+          src="/images/architects_bg.jpg" 
+          alt="" 
+          className="absolute top-32 -right-20 w-80 h-80 md:w-[32rem] md:h-[32rem] object-cover rounded-full opacity-[0.03] mix-blend-multiply blur-sm"
+        />
+        <img 
+          src="/images/walkthrough_bg.jpg" 
+          alt="" 
+          className="absolute top-[50%] -left-32 w-64 h-64 md:w-96 md:h-96 object-cover rounded-[3rem] opacity-[0.03] mix-blend-multiply blur-[2px] rotate-12"
+        />
+        <div className="absolute bottom-10 -right-10 opacity-[0.02] font-display text-8xl md:text-[10rem] font-bold text-foreground whitespace-nowrap rotate-3">
+          3D Walkthrough
+        </div>
+      </div>
+
       {/* Slider Container (Frame 1 & 2 style) */}
-      <div className="w-full max-w-6xl flex flex-col items-center gap-6">
+      <div className="w-full max-w-6xl flex flex-col items-center gap-6 relative z-10">
         
         <div 
           className="w-full aspect-[4/3] md:aspect-[16/9] lg:aspect-[21/9] rounded-[24px] overflow-hidden relative cursor-ew-resize shadow-md border border-card-border"
@@ -159,7 +179,7 @@ export function Hero() {
       </div>
 
       {/* Copy below image (Frame 1 style) */}
-      <div className="mt-12 md:mt-16 text-center max-w-3xl flex flex-col items-center">
+      <div className="mt-12 md:mt-16 text-center max-w-3xl flex flex-col items-center relative z-10">
         <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground font-semibold tracking-tight leading-tight mb-6">
           Wall Art, Reimagined: <br className="hidden md:block"/> Flawless Direct-to-Wall Printing
         </h1>
