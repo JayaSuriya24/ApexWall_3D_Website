@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/sections/navbar";
 import { Hero } from "@/components/sections/hero";
 import { ServiceVerticals } from "@/components/sections/service-verticals";
+import { Partners } from "@/components/sections/partners";
 import { ComparisonMatrix } from "@/components/sections/comparison-matrix";
 import { CostEstimator } from "@/components/sections/cost-estimator";
 import { ProjectGallery } from "@/components/sections/project-gallery";
@@ -18,6 +19,7 @@ export default function Home() {
       <main className="flex min-h-screen flex-col pb-24">
         <Hero />
         <ServiceVerticals />
+        <Partners />
         <ComparisonMatrix />
         <CostEstimator />
         <ProjectGallery />
