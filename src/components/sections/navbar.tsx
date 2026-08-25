@@ -57,9 +57,7 @@ export function Navbar() {
 
           {/* Desktop Actions */}
           <div className="hidden lg:flex items-center">
-            <PillButton asChild variant="outline" className="px-6 py-2">
-              <a href="#contact">Contact</a>
-            </PillButton>
+            {/* Removed Contact Button */}
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -94,11 +92,7 @@ export function Navbar() {
                 </a>
               ))}
               <div className="mt-8">
-                <PillButton asChild variant="outline" className="w-full">
-                  <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
-                    Contact
-                  </a>
-                </PillButton>
+                {/* Removed Mobile Contact Button */}
               </div>
             </nav>
           </motion.div>
