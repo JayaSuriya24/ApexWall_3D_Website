@@ -102,7 +102,7 @@ export function CostEstimator() {
               <div className="font-display font-bold text-4xl md:text-5xl text-foreground">
                 ₹{estimatedMin.toLocaleString()} - ₹{estimatedMax.toLocaleString()}
               </div>
-              <span className="text-xs text-muted">* Final cost may vary after site inspection</span>
+              <span className="text-xs text-muted">* Final cost may vary either high or low after site inspection</span>
             </div>
 
             <PillButton asChild variant="outline" className="w-full mt-4">
