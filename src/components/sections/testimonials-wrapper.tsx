@@ -9,7 +9,7 @@ export function TestimonialsWrapper() {
 
   // Load from local storage on mount
   useEffect(() => {
-    const saved = localStorage.getItem("apexwall-testimonials");
+    const saved = localStorage.getItem("apexwall-feedback");
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
@@ -25,7 +25,7 @@ export function TestimonialsWrapper() {
   const handleAddFeedback = (newFeedback: Testimonial) => {
     setTestimonials((prev) => {
       const updated = [newFeedback, ...prev];
-      localStorage.setItem("apexwall-testimonials", JSON.stringify(updated));
+      localStorage.setItem("apexwall-feedback", JSON.stringify(updated));
       return updated;
     });
   };
