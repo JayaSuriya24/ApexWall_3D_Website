@@ -3,7 +3,7 @@
 import { Card } from "@/components/ui/card";
 import { PillButton } from "@/components/ui/pill-button";
 import { siteConfig } from "@/config/site";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function Footer() {
@@ -26,12 +26,22 @@ export function Footer() {
         },
       });
       setIsSubmitted(true);
+      form.reset();
     } catch (error) {
       console.error("Form submission error", error);
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    if (isSubmitted) {
+      const timer = setTimeout(() => {
+        setIsSubmitted(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [isSubmitted]);
   return (
     <footer id="contact" className="pt-20 md:pt-32 pb-12 bg-background px-6 border-t border-card-border">
       <div className="mx-auto max-w-6xl">
@@ -91,8 +101,10 @@ export function Footer() {
               ) : (
                 <motion.div 
                   key="success-message"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 30 }}
+                  transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                   className="flex flex-col items-center justify-center py-8 text-center gap-4 bg-card-bg border border-card-border rounded-xl h-full"
                 >
                   <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
@@ -100,12 +112,6 @@ export function Footer() {
                   </div>
                   <h4 className="font-display font-semibold text-2xl text-foreground">Thank You!</h4>
                   <p className="text-muted text-sm px-6">Your enquiry has been received. We will get back to you shortly.</p>
-                  <button 
-                    onClick={() => setIsSubmitted(false)}
-                    className="mt-4 text-xs font-medium text-primary hover:underline uppercase tracking-widest"
-                  >
-                    Send another
-                  </button>
                 </motion.div>
               )}
             </AnimatePresence>
