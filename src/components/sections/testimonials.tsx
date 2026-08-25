@@ -12,29 +12,7 @@ export type Testimonial = {
   rating: number;
 };
 
-export const INITIAL_TESTIMONIALS: Testimonial[] = [
-  {
-    name: "Karthik R.",
-    location: "Thillai Nagar, Trichy",
-    project: "Living Room Accent Wall",
-    text: "We wanted something unique for our new flat. ApexWall came in, set up their robotic printer, and within 3 hours our plain wall was transformed into an incredible 3D forest mural. No mess, no smell.",
-    rating: 5,
-  },
-  {
-    name: "Priya S.",
-    location: "KK Nagar Cafe Owner",
-    project: "Commercial Branding",
-    text: "I was considering custom wallpaper, but heard it peels near the AC vents. UV wall printing was the best decision. The colors pop so vibrantly, and our customers constantly use it as a selfie background.",
-    rating: 5,
-  },
-  {
-    name: "Venkatachalam M.",
-    location: "Srirangam",
-    project: "Pooja Room Deity",
-    text: "The detail on the Lord Ranganathar print is divine. It looks exactly like a traditional Tanjore painting but printed directly onto our plaster. Highly recommend their professional team.",
-    rating: 5,
-  },
-];
+export const INITIAL_TESTIMONIALS: Testimonial[] = [];
 
 const TRUST_MARKS = [
   { text: "Made in Tamil Nadu", icon: Factory },
