@@ -27,15 +27,39 @@ export function Navbar() {
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    if (href === "#") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      const targetId = href.replace("#", "");
-      const element = document.getElementById(targetId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+    
+    const targetElement = href === "#" ? document.body : document.getElementById(href.replace("#", ""));
+    if (!targetElement) return;
+
+    const targetPosition = href === "#" ? 0 : targetElement.getBoundingClientRect().top + window.scrollY;
+    const startPosition = window.scrollY;
+    const distance = targetPosition - startPosition;
+    let startTime: number | null = null;
+    const duration = 1200; // Slow, luxurious 1.2s scroll
+
+    // Easing function for a slow start and slow end
+    const easeInOutCubic = (t: number, b: number, c: number, d: number) => {
+      t /= d / 2;
+      if (t < 1) return c / 2 * t * t * t + b;
+      t -= 2;
+      return c / 2 * (t * t * t + 2) + b;
+    };
+
+    const animation = (currentTime: number) => {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const nextPosition = easeInOutCubic(timeElapsed, startPosition, distance, duration);
+      
+      window.scrollTo(0, nextPosition);
+      
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation);
+      } else {
+        window.scrollTo(0, targetPosition); // Snap to exact end
       }
-    }
+    };
+
+    requestAnimationFrame(animation);
   };
 
   return (
