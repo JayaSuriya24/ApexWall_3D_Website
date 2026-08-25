@@ -78,7 +78,7 @@ export function Testimonials({ data = INITIAL_TESTIMONIALS }: { data?: Testimoni
               const el = document.getElementById('testimonials-container');
               if (el) el.scrollBy({ left: -el.clientWidth, behavior: 'smooth' });
             }}
-            className="absolute -left-4 md:-left-12 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 bg-white border border-card-border rounded-full shadow-lg text-foreground hover:text-primary transition-all opacity-0 group-hover:opacity-100 hidden md:block"
+            className="absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 bg-white border border-card-border rounded-full shadow-lg text-foreground hidden md:block"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
           </button>
@@ -88,7 +88,7 @@ export function Testimonials({ data = INITIAL_TESTIMONIALS }: { data?: Testimoni
               const el = document.getElementById('testimonials-container');
               if (el) el.scrollBy({ left: el.clientWidth, behavior: 'smooth' });
             }}
-            className="absolute -right-4 md:-right-12 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 bg-white border border-card-border rounded-full shadow-lg text-foreground hover:text-primary transition-all opacity-0 group-hover:opacity-100 hidden md:block"
+            className="absolute -right-4 md:-right-6 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 bg-white border border-card-border rounded-full shadow-lg text-foreground hidden md:block"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
           </button>
