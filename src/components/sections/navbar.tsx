@@ -37,9 +37,9 @@ export function Navbar() {
           {/* Logo */}
           <div className="flex items-center">
             <img 
-              src="/images/logo.png" 
+              src="/images/logo_transparent.png" 
               alt="ApexWall" 
-              className="h-16 md:h-20 w-auto object-contain mix-blend-multiply" 
+              className="h-16 md:h-20 w-auto object-contain" 
             />
           </div>
 
