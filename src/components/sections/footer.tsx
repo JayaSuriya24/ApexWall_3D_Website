@@ -158,9 +158,9 @@ export function Footer() {
             </div>
             <div className="flex gap-3">
               {[
-                "https://images.unsplash.com/photo-1518599904199-0ca897819ddb?w=200&h=200&fit=crop",
-                "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=200&h=200&fit=crop",
-                "https://images.unsplash.com/photo-1600607686527-6fb886090705?w=200&h=200&fit=crop",
+                "/images/direct-to-wall.jpg",
+                "/images/architects_bg.jpg",
+                "/images/interior-design.png",
               ].map((img, i) => (
                 <div key={i} className="w-20 h-20 rounded-xl overflow-hidden border border-card-border">
                   <img src={img} alt="Instagram preview" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500 cursor-pointer" />
