@@ -26,10 +26,22 @@ const PROJECTS = [
     image: "/images/gallery/residential-3.jpg",
   },
   {
-    id: 4,
-    title: "Rockfort Temple Mural",
+    id: 16,
+    title: "Vibrant Deity Wall Art",
     category: "Traditional",
-    image: "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&q=80&w=800",
+    image: "/images/gallery/traditional-1.jpg",
+  },
+  {
+    id: 17,
+    title: "Intricate Mandala Centerpiece",
+    category: "Traditional",
+    image: "/images/gallery/traditional-2.jpg",
+  },
+  {
+    id: 18,
+    title: "Glowing Mandala Relief",
+    category: "Traditional",
+    image: "/images/gallery/traditional-3.jpg",
   },
   {
     id: 5,
