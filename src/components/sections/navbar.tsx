@@ -25,6 +25,19 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    if (href === "#") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const targetId = href.replace("#", "");
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
   return (
     <>
       <header
@@ -48,7 +61,8 @@ export function Navbar() {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                onClick={(e) => handleSmoothScroll(e, link.href)}
+                className="text-sm font-medium text-foreground hover:text-primary transition-colors cursor-pointer"
               >
                 {link.label}
               </a>
@@ -85,8 +99,11 @@ export function Navbar() {
                 <a
                   key={link.label}
                   href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-2xl font-display font-medium text-foreground hover:text-primary transition-colors border-b border-card-border pb-4"
+                  onClick={(e) => {
+                    handleSmoothScroll(e, link.href);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="text-2xl font-display font-medium text-foreground hover:text-primary transition-colors border-b border-card-border pb-4 cursor-pointer"
                 >
                   {link.label}
                 </a>
