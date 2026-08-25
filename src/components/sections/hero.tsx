@@ -74,30 +74,48 @@ export function Hero() {
       {/* Decorative Background Elements (Hidden on mobile) */}
       <div className="absolute inset-0 pointer-events-none z-0 hidden xl:block">
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut", delay: 0.1 }}
           className="absolute top-[15%] left-[4%] w-64 h-48 rounded-2xl overflow-hidden shadow-2xl opacity-60"
         >
           <img src="/images/architects_bg.jpg" alt="Architects" className="w-full h-full object-cover" />
         </motion.div>
 
         <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
           className="absolute top-[40%] right-[3%] w-72 h-56 rounded-2xl overflow-hidden shadow-2xl opacity-60"
         >
           <img src="/images/hero-after.jpg" alt="Direct to Wall Printing" className="w-full h-full object-cover" />
         </motion.div>
 
         <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
           className="absolute bottom-[10%] left-[8%] w-56 h-40 rounded-2xl overflow-hidden shadow-2xl opacity-60"
         >
           <img src="/images/walkthrough_bg.jpg" alt="Real-Size 3D Walkthrough" className="w-full h-full object-cover" />
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut", delay: 0.7 }}
+          className="absolute top-[10%] right-[15%] w-48 h-36 rounded-2xl overflow-hidden shadow-2xl opacity-60"
+        >
+          <img src="/images/gallery/kids-1.jpg" alt="Kids Room" className="w-full h-full object-cover" />
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut", delay: 0.9 }}
+          className="absolute bottom-[5%] right-[25%] w-52 h-36 rounded-2xl overflow-hidden shadow-2xl opacity-60"
+        >
+          <img src="/images/gallery/commercial-1.jpg" alt="Commercial Space" className="w-full h-full object-cover" />
         </motion.div>
       </div>
 
