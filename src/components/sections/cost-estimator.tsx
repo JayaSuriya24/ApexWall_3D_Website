@@ -29,24 +29,33 @@ export function CostEstimator() {
         <span>{label}</span>
         <span>{value}{unit ? ` ${unit}` : ""}</span>
       </div>
-      <div className="relative w-full h-1 bg-card-border rounded-full">
+      <div className="relative w-full h-6 flex items-center">
+        {/* Background Track */}
+        <div className="absolute top-1/2 -mt-[2px] w-full h-1 bg-card-border rounded-full pointer-events-none" />
+        
+        {/* Fill Track */}
+        <div 
+          className="absolute top-1/2 -mt-[2px] h-1 bg-primary rounded-full pointer-events-none z-10" 
+          style={{ width: `${((value - min) / (max - min)) * 100}%` }}
+        />
+
         {/* Step Indicator Dots */}
         {steps && (
-          <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 pointer-events-none z-10">
             {Array.from({ length: steps }).map((_, i) => (
               <div 
                 key={i} 
-                className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full transition-colors ${
+                className={`absolute top-1/2 -mt-1 w-2 h-2 rounded-full transition-colors ${
                   value >= min + (i * ((max - min) / (steps - 1))) ? 'bg-primary' : 'bg-muted/30'
                 }`}
                 style={{ 
-                  left: `${(i / (steps - 1)) * 100}%`, 
-                  transform: 'translate(-50%, -50%)' 
+                  left: `calc(${(i / (steps - 1)) * 100}% - 4px)`
                 }}
               />
             ))}
           </div>
         )}
+        
         <input
           type="range"
           min={min}
@@ -56,14 +65,10 @@ export function CostEstimator() {
           onChange={(e) => setter(Number(e.target.value))}
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20"
         />
-        {/* Fill Track */}
-        <div 
-          className="absolute top-0 left-0 h-full bg-primary rounded-full z-10 pointer-events-none" 
-          style={{ width: `${((value - min) / (max - min)) * 100}%` }}
-        />
+
         {/* Bronze Knob */}
         <div 
-          className="absolute top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-gradient-to-br from-[#E3D5C8] to-[#C19B76] border-2 border-white shadow-md z-10 pointer-events-none transition-transform"
+          className="absolute top-1/2 -mt-3 w-6 h-6 rounded-full bg-gradient-to-br from-[#E3D5C8] to-[#C19B76] border-2 border-white shadow-md z-10 pointer-events-none"
           style={{ left: `calc(${((value - min) / (max - min)) * 100}% - 12px)` }}
         />
       </div>
