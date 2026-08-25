@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 
 export function SplashScreen() {
   const [show, setShow] = useState(true);
@@ -16,7 +16,7 @@ export function SplashScreen() {
 
   const text = "ApexWall";
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -27,7 +27,7 @@ export function SplashScreen() {
     },
   };
 
-  const letterVariants = {
+  const letterVariants: Variants = {
     hidden: { opacity: 0, x: -20 },
     visible: {
       opacity: 1,
