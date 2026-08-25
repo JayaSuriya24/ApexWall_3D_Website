@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="flex min-h-screen flex-col gap-24 md:gap-32 pb-24">
+      <main className="flex min-h-screen flex-col pb-24">
         <Hero />
         <ServiceVerticals />
         <ComparisonMatrix />
