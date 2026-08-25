@@ -36,9 +36,11 @@ export function Navbar() {
         <div className="mx-auto max-w-7xl flex items-center justify-between px-6 md:px-12">
           {/* Logo */}
           <div className="flex items-center">
-            <span className="font-display font-bold text-2xl tracking-tight text-foreground">
-              ApexWall
-            </span>
+            <img 
+              src="/images/logo.png" 
+              alt="ApexWall" 
+              className="h-16 md:h-20 w-auto object-contain mix-blend-multiply" 
+            />
           </div>
 
           {/* Desktop Nav */}
