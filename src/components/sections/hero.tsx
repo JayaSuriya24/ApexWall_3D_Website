@@ -73,22 +73,26 @@ export function Hero() {
       
       {/* Background Watermarks */}
       <div className="absolute inset-0 pointer-events-none select-none z-0">
-        <div className="absolute top-20 -left-10 opacity-[0.02] font-display text-8xl md:text-[12rem] font-bold text-foreground whitespace-nowrap -rotate-6">
-          Direct-to-Wall
-        </div>
+        <img 
+          src="/images/palette_bg.jpg" 
+          alt="" 
+          className="absolute top-10 -left-20 w-72 h-72 md:w-[28rem] md:h-[28rem] object-cover rounded-full opacity-[0.08] mix-blend-multiply blur-[3px] -rotate-12"
+        />
         <img 
           src="/images/architects_bg.jpg" 
           alt="" 
-          className="absolute top-32 -right-20 w-80 h-80 md:w-[32rem] md:h-[32rem] object-cover rounded-full opacity-[0.03] mix-blend-multiply blur-sm"
+          className="absolute top-32 -right-20 w-80 h-80 md:w-[32rem] md:h-[32rem] object-cover rounded-[4rem] opacity-[0.08] mix-blend-multiply blur-[2px]"
         />
         <img 
           src="/images/walkthrough_bg.jpg" 
           alt="" 
-          className="absolute top-[50%] -left-32 w-64 h-64 md:w-96 md:h-96 object-cover rounded-[3rem] opacity-[0.03] mix-blend-multiply blur-[2px] rotate-12"
+          className="absolute top-[50%] -left-32 w-64 h-64 md:w-96 md:h-96 object-cover rounded-full opacity-[0.08] mix-blend-multiply blur-[4px] rotate-12"
         />
-        <div className="absolute bottom-10 -right-10 opacity-[0.02] font-display text-8xl md:text-[10rem] font-bold text-foreground whitespace-nowrap rotate-3">
-          3D Walkthrough
-        </div>
+        <img 
+          src="/images/hero-after.jpg" 
+          alt="" 
+          className="absolute bottom-10 -right-10 w-72 h-72 md:w-[28rem] md:h-[28rem] object-cover rounded-[3rem] opacity-[0.06] mix-blend-multiply blur-[2px] -rotate-6"
+        />
       </div>
 
       {/* Slider Container (Frame 1 & 2 style) */}
