@@ -36,7 +36,7 @@ const TRUST_MARKS = [
 
 export function Testimonials() {
   return (
-    <section className="py-20 md:py-32 relative bg-background px-6">
+    <section className="py-12 md:py-16 relative bg-background px-6">
       <div className="mx-auto max-w-7xl flex flex-col items-center">
         
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 w-full mb-12 md:mb-16">

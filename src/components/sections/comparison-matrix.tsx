@@ -31,7 +31,7 @@ const COMPARISONS = [
 
 export function ComparisonMatrix() {
   return (
-    <section id="why-us" className="py-20 md:py-32 bg-background px-6">
+    <section id="why-us" className="py-12 md:py-16 bg-background px-6">
       <div className="mx-auto max-w-5xl flex flex-col items-center text-center">
         
         <h2 className="font-display font-semibold text-4xl md:text-5xl text-foreground mb-4">

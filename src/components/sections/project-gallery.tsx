@@ -107,7 +107,7 @@ export function ProjectGallery() {
     : PROJECTS.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="gallery" className="py-20 md:py-32 relative bg-background px-6">
+    <section id="gallery" className="py-12 md:py-16 relative bg-background px-6">
       <div className="mx-auto max-w-7xl flex flex-col items-center">
         
         {/* Header */}

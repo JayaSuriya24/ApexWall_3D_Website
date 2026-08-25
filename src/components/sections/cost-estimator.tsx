@@ -71,7 +71,7 @@ export function CostEstimator() {
   );
 
   return (
-    <section id="pricing" className="py-20 md:py-32 bg-background px-6">
+    <section id="pricing" className="py-12 md:py-16 bg-background px-6">
       <div className="mx-auto max-w-4xl flex flex-col items-center">
         
         <h2 className="font-display font-semibold text-4xl md:text-5xl text-foreground mb-4">

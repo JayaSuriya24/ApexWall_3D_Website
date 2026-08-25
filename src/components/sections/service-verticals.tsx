@@ -3,7 +3,7 @@ import { PenTool, Palette } from "lucide-react";
 
 export function ServiceVerticals() {
   return (
-    <section id="feature" className="py-20 md:py-32 relative bg-background px-6">
+    <section id="feature" className="py-12 md:py-16 relative bg-background px-6">
       <div className="mx-auto max-w-7xl flex flex-col items-center">
         <div className="text-center mb-16 max-w-2xl">
           <h2 className="font-display font-semibold text-4xl md:text-5xl text-foreground mb-4">
