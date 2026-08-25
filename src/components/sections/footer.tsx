@@ -3,8 +3,35 @@
 import { Card } from "@/components/ui/card";
 import { PillButton } from "@/components/ui/pill-button";
 import { siteConfig } from "@/config/site";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Footer() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error("Form submission error", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <footer id="contact" className="pt-20 md:pt-32 pb-12 bg-background px-6 border-t border-card-border">
       <div className="mx-auto max-w-6xl">
@@ -20,40 +47,68 @@ export function Footer() {
           {/* Form */}
           <div className="flex flex-col gap-6">
             <h3 className="font-semibold text-foreground text-lg mb-2">Service Area</h3>
-            <form 
-              className="flex flex-col gap-4" 
-              action="https://formsubmit.co/jayasuriyamanickavasagam@gmail.com" 
-              method="POST"
-            >
-              <input 
-                type="text"
-                name="name"
-                required 
-                placeholder="Name" 
-                className="w-full bg-card-bg border border-card-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted/60 focus:outline-none focus:border-primary transition-colors" 
-              />
-              <input 
-                type="email" 
-                name="email"
-                required
-                placeholder="Email" 
-                className="w-full bg-card-bg border border-card-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted/60 focus:outline-none focus:border-primary transition-colors" 
-              />
-              <textarea 
-                name="message"
-                required
-                rows={4} 
-                placeholder="Message" 
-                className="w-full bg-card-bg border border-card-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted/60 focus:outline-none focus:border-primary transition-colors resize-none" 
-              />
-              {/* Disable ReCaptcha to keep it simple, or leave it. Setting _captcha to false disables it. */}
-              <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_subject" value="New Website Enquiry - ApexWall 3D" />
-              
-              <PillButton type="submit" variant="outline" className="w-full mt-2">
-                Submit
-              </PillButton>
-            </form>
+            <AnimatePresence mode="wait">
+              {!isSubmitted ? (
+                <motion.form 
+                  key="contact-form"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex flex-col gap-4" 
+                  action="https://formsubmit.co/jayasuriyamanickavasagam@gmail.com" 
+                  method="POST"
+                  onSubmit={handleSubmit}
+                >
+                  <input 
+                    type="text"
+                    name="name"
+                    required 
+                    placeholder="Name" 
+                    className="w-full bg-card-bg border border-card-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted/60 focus:outline-none focus:border-primary transition-colors" 
+                  />
+                  <input 
+                    type="email" 
+                    name="email"
+                    required
+                    placeholder="Email" 
+                    className="w-full bg-card-bg border border-card-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted/60 focus:outline-none focus:border-primary transition-colors" 
+                  />
+                  <textarea 
+                    name="message"
+                    required
+                    rows={4} 
+                    placeholder="Message" 
+                    className="w-full bg-card-bg border border-card-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted/60 focus:outline-none focus:border-primary transition-colors resize-none" 
+                  />
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="hidden" name="_subject" value="New Website Enquiry - ApexWall 3D" />
+                  
+                  <PillButton type="submit" variant="outline" className="w-full mt-2" disabled={isSubmitting}>
+                    {isSubmitting ? "Sending..." : "Submit"}
+                  </PillButton>
+                </motion.form>
+              ) : (
+                <motion.div 
+                  key="success-message"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="flex flex-col items-center justify-center py-8 text-center gap-4 bg-card-bg border border-card-border rounded-xl h-full"
+                >
+                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                  </div>
+                  <h4 className="font-display font-semibold text-2xl text-foreground">Thank You!</h4>
+                  <p className="text-muted text-sm px-6">Your enquiry has been received. We will get back to you shortly.</p>
+                  <button 
+                    onClick={() => setIsSubmitted(false)}
+                    className="mt-4 text-xs font-medium text-primary hover:underline uppercase tracking-widest"
+                  >
+                    Send another
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Map */}
