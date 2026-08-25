@@ -69,7 +69,7 @@ export function Hero() {
   }, [isDragging]);
 
   return (
-    <section className="relative pt-32 pb-12 md:pt-40 md:pb-16 flex flex-col items-center justify-start bg-background px-6">
+    <section className="relative min-h-[100dvh] pt-28 pb-12 md:pb-16 flex flex-col items-center justify-center bg-background px-6">
       
       {/* Slider Container (Frame 1 & 2 style) */}
       <div className="w-full max-w-6xl flex flex-col items-center gap-6">
