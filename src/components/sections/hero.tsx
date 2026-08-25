@@ -60,18 +60,23 @@ export function Hero() {
       >
         {/* Before Image (Bare Wall) */}
         <img
-          src="/images/before-after/before.png"
-          alt="Bare cafe wall"
+          src="/images/hero-before.jpg"
+          alt="Bare living room wall"
           className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
         />
         
-        {/* After Image (Printed Mural) */}
-        <img
-          src="/images/before-after/after.png"
-          alt="Printed barista line art mural"
-          className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
-          style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-        />
+        {/* After Image (Floral Mural / Arched Gallery) */}
+        <div 
+          className="absolute inset-0 overflow-hidden"
+          style={{ width: `${sliderPosition}%` }}
+        >
+          <img
+            src="/images/hero-after.jpg"
+            alt="Printed floral wall art"
+            className="absolute inset-0 w-full h-full object-cover max-w-none select-none pointer-events-none"
+            style={{ width: "100vw", maxWidth: "100%" }}
+          />
+        </div>
 
         {/* Bronze Slider Handle */}
         <div 
