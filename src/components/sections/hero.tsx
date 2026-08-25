@@ -66,17 +66,12 @@ export function Hero() {
         />
         
         {/* Overlay Image (Before / Bare Wall) */}
-        <div 
-          className="absolute inset-0 overflow-hidden"
-          style={{ width: `${sliderPosition}%` }}
-        >
-          <img
-            src="/images/hero-before.jpg"
-            alt="Bare living room wall"
-            className="absolute inset-0 w-full h-full object-cover max-w-none select-none pointer-events-none"
-            style={{ width: "100vw", maxWidth: "100%" }}
-          />
-        </div>
+        <img
+          src="/images/hero-before.jpg"
+          alt="Bare living room wall"
+          className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
+          style={{ clipPath: `inset(0 calc(100% - ${sliderPosition}%) 0 0)` }}
+        />
 
         {/* Bronze Slider Handle */}
         <div 
