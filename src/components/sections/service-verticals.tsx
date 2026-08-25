@@ -19,20 +19,30 @@ export function ServiceVerticals() {
         <div className="grid md:grid-cols-2 gap-6 w-full max-w-5xl">
           
           {/* Left Large Card: Architects & Designers */}
-          <Card className="flex flex-col items-center justify-center text-center gap-6 aspect-square md:aspect-auto">
-            <div className="w-16 h-16 rounded-2xl bg-secondary/30 flex items-center justify-center mb-2">
-              <PenTool className="w-8 h-8 text-primary" strokeWidth={1.5} />
+          <Card className="relative overflow-hidden group aspect-square md:aspect-auto md:min-h-[500px]">
+            <img 
+              src="/images/architects_bg.jpg" 
+              alt="Architectural workspace"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            {/* Elegant dark overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            
+            <div className="absolute inset-0 p-8 flex flex-col items-center justify-end text-center gap-4 z-10">
+              <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center mb-2 shadow-xl">
+                <PenTool className="w-8 h-8 text-white" strokeWidth={1.5} />
+              </div>
+              <h3 className="font-display font-semibold text-3xl text-white">
+                Architects and <br/> designers
+              </h3>
             </div>
-            <h3 className="font-display font-semibold text-2xl text-foreground">
-              Architects and <br/> designers
-            </h3>
           </Card>
 
           {/* Right Column (2 Stacked Cards) */}
           <div className="flex flex-col gap-6">
             
             {/* Top Right: Textured Interior Sample */}
-            <Card className="p-0 overflow-hidden h-[300px] relative group">
+            <Card className="p-0 overflow-hidden h-[300px] relative group border-0 shadow-md">
               <img 
                 src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=1000" 
                 alt="High-end textured interior"
@@ -42,16 +52,24 @@ export function ServiceVerticals() {
 
             {/* Bottom Right: Pattern / Color Swatches */}
             <div className="grid grid-cols-2 gap-6 h-[250px]">
-              <Card className="p-0 overflow-hidden relative group">
+              <Card className="p-0 overflow-hidden relative group border-0 shadow-md">
                 <img 
                   src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=800" 
                   alt="Geometric wall texture"
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               </Card>
-              <Card className="flex flex-col items-center justify-center bg-white shadow-sm border-card-border">
-                <div className="w-12 h-12 rounded-xl bg-secondary/30 flex items-center justify-center">
-                  <Palette className="w-6 h-6 text-primary" strokeWidth={1.5} />
+              <Card className="relative overflow-hidden group border-0 shadow-md">
+                <img 
+                  src="/images/palette_bg.jpg" 
+                  alt="Design material swatches"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-500" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
+                  <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-xl">
+                    <Palette className="w-7 h-7 text-white" strokeWidth={1.5} />
+                  </div>
                 </div>
               </Card>
             </div>
