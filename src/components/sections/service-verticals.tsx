@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { PenTool, Palette, Sofa } from "lucide-react";
+import { PenTool } from "lucide-react";
 
 export function ServiceVerticals() {
   return (
@@ -68,10 +68,7 @@ export function ServiceVerticals() {
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-500" />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-center gap-3 p-4">
-                    <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-xl">
-                      <Sofa className="w-6 h-6 text-white" strokeWidth={1.5} />
-                    </div>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-center p-4">
                     <h3 className="font-display font-semibold text-lg md:text-xl text-white leading-tight drop-shadow-md">
                       Interior <br/> Design
                     </h3>
@@ -84,10 +81,7 @@ export function ServiceVerticals() {
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-500" />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-center gap-3 p-4">
-                    <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-xl">
-                      <Palette className="w-6 h-6 text-white" strokeWidth={1.5} />
-                    </div>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-center p-4">
                     <h3 className="font-display font-semibold text-lg md:text-xl text-white leading-tight drop-shadow-md">
                       Architectural <br/> Modeling
                     </h3>
