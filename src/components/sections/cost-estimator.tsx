@@ -96,10 +96,13 @@ export function CostEstimator() {
 
           {/* Right: Output */}
           <div className="flex flex-col items-center text-center gap-6 border-t md:border-t-0 md:border-l border-card-border pt-10 md:pt-0 md:pl-12">
-            <span className="text-muted text-sm uppercase tracking-widest font-semibold">Estimated Cost:</span>
+            <span className="text-muted text-sm uppercase tracking-widest font-semibold">Approximate Cost:</span>
             
-            <div className="font-display font-bold text-4xl md:text-5xl text-foreground">
-              ₹{estimatedMin.toLocaleString()} - ₹{estimatedMax.toLocaleString()}
+            <div className="flex flex-col items-center gap-2">
+              <div className="font-display font-bold text-4xl md:text-5xl text-foreground">
+                ₹{estimatedMin.toLocaleString()} - ₹{estimatedMax.toLocaleString()}
+              </div>
+              <span className="text-xs text-muted">* Final cost may vary after site inspection</span>
             </div>
 
             <PillButton asChild variant="outline" className="w-full mt-4">
