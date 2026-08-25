@@ -8,10 +8,12 @@ import { HowItWorks } from "@/components/sections/how-it-works";
 import { Testimonials } from "@/components/sections/testimonials";
 import { FAQ } from "@/components/sections/faq";
 import { Footer } from "@/components/sections/footer";
+import { SplashScreen } from "@/components/ui/splash-screen";
 
 export default function Home() {
   return (
     <>
+      <SplashScreen />
       <Navbar />
       <main className="flex min-h-screen flex-col pb-24">
         <Hero />
