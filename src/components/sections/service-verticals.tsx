@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { PenTool, Palette } from "lucide-react";
+import { PenTool, Palette, Sofa } from "lucide-react";
 
 export function ServiceVerticals() {
   return (
@@ -61,12 +61,21 @@ export function ServiceVerticals() {
 
               {/* Bottom Right: Pattern / Color Swatches */}
               <div className="grid grid-cols-2 gap-6 h-[250px]">
-                <Card className="p-0 overflow-hidden relative group border-0 shadow-md">
+                <Card className="relative overflow-hidden group border-0 shadow-md">
                   <img 
-                    src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=800" 
-                    alt="Geometric wall texture"
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    src="/images/interior-design.png" 
+                    alt="Interior Design"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-500" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-center gap-3 p-4">
+                    <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-xl">
+                      <Sofa className="w-6 h-6 text-white" strokeWidth={1.5} />
+                    </div>
+                    <h3 className="font-display font-semibold text-lg md:text-xl text-white leading-tight drop-shadow-md">
+                      Interior <br/> Design
+                    </h3>
+                  </div>
                 </Card>
                 <Card className="relative overflow-hidden group border-0 shadow-md">
                   <img 
