@@ -104,9 +104,9 @@ export function Testimonials({ data = INITIAL_TESTIMONIALS }: { data?: Testimoni
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: Math.min(i, 3) * 0.1 }}
-                className="h-full shrink-0 snap-start w-[85vw] md:w-[calc(33.333%-16px)]"
+                className="flex flex-col shrink-0 snap-start w-[85vw] md:w-[calc(33.333%-16px)]"
               >
-                <Card className="h-full flex flex-col gap-6">
+                <Card className="flex-1 flex flex-col gap-6 h-full">
                   <div className="flex items-center gap-1">
                     {[...Array(testimonial.rating)].map((_, j) => (
                       <Star key={j} className="w-4 h-4 text-primary fill-primary" />
