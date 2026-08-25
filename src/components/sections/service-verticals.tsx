@@ -1,3 +1,5 @@
+"use client";
+
 import { Card } from "@/components/ui/card";
 import { PenTool, Palette } from "lucide-react";
 
@@ -97,7 +99,14 @@ export function ServiceVerticals() {
                   Experience your floor plan at 1:1 scale before construction begins.
                 </p>
               </div>
-              <a href="#3d-walkthrough" className="inline-flex items-center justify-center bg-white text-foreground px-6 py-3 rounded-full font-medium hover:bg-gray-100 transition-colors whitespace-nowrap">
+              <a 
+                href="#3d-walkthrough" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('3d-walkthrough')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="inline-flex items-center justify-center bg-white text-foreground px-6 py-3 rounded-full font-medium hover:bg-gray-100 transition-colors whitespace-nowrap"
+              >
                 Experience Your Space
               </a>
             </div>
