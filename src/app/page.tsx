@@ -2,6 +2,7 @@ import { Navbar } from "@/components/sections/navbar";
 import { Hero } from "@/components/sections/hero";
 import { ServiceVerticals } from "@/components/sections/service-verticals";
 import { Partners } from "@/components/sections/partners";
+import { FloorplanWalkthrough } from "@/components/sections/floorplan-walkthrough";
 import { ComparisonMatrix } from "@/components/sections/comparison-matrix";
 import { CostEstimator } from "@/components/sections/cost-estimator";
 import { ProjectGallery } from "@/components/sections/project-gallery";
@@ -20,6 +21,7 @@ export default function Home() {
         <Hero />
         <ServiceVerticals />
         <Partners />
+        <FloorplanWalkthrough />
         <ComparisonMatrix />
         <CostEstimator />
         <ProjectGallery />
