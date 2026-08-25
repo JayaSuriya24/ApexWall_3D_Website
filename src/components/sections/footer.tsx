@@ -20,22 +20,36 @@ export function Footer() {
           {/* Form */}
           <div className="flex flex-col gap-6">
             <h3 className="font-semibold text-foreground text-lg mb-2">Service Area</h3>
-            <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
+            <form 
+              className="flex flex-col gap-4" 
+              action="https://formsubmit.co/jayasuriyamanickavasagam@gmail.com" 
+              method="POST"
+            >
               <input 
-                type="text" 
+                type="text"
+                name="name"
+                required 
                 placeholder="Name" 
                 className="w-full bg-card-bg border border-card-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted/60 focus:outline-none focus:border-primary transition-colors" 
               />
               <input 
                 type="email" 
+                name="email"
+                required
                 placeholder="Email" 
                 className="w-full bg-card-bg border border-card-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted/60 focus:outline-none focus:border-primary transition-colors" 
               />
               <textarea 
+                name="message"
+                required
                 rows={4} 
                 placeholder="Message" 
                 className="w-full bg-card-bg border border-card-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted/60 focus:outline-none focus:border-primary transition-colors resize-none" 
               />
+              {/* Disable ReCaptcha to keep it simple, or leave it. Setting _captcha to false disables it. */}
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_subject" value="New Website Enquiry - ApexWall 3D" />
+              
               <PillButton type="submit" variant="outline" className="w-full mt-2">
                 Submit
               </PillButton>
