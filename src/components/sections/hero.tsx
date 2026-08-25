@@ -6,14 +6,14 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const SLIDES = [
   {
-    id: "residential",
-    before: "/images/hero-before.jpg",
-    after: "/images/hero-after.jpg",
-  },
-  {
     id: "commercial",
     before: "/images/commercial-before.jpg",
     after: "/images/commercial-after.jpg",
+  },
+  {
+    id: "residential",
+    before: "/images/hero-before.jpg",
+    after: "/images/hero-after.jpg",
   },
   {
     id: "traditional",
@@ -25,7 +25,7 @@ const SLIDES = [
 export function Hero() {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(1);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const nextSlide = () => {
