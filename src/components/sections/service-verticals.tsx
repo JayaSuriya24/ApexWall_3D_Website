@@ -44,13 +44,19 @@ export function ServiceVerticals() {
             {/* Right Column (2 Stacked Cards) */}
             <div className="flex flex-col gap-6">
               
-              {/* Top Right: Textured Interior Sample */}
+              {/* Top Right: Direct-to-Wall Printing */}
               <Card className="p-0 overflow-hidden h-[300px] relative group border-0 shadow-md">
                 <img 
-                  src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=1000" 
-                  alt="High-end textured interior"
+                  src="/images/direct-to-wall.jpg" 
+                  alt="Direct-to-Wall Printing in action"
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <div className="absolute inset-0 p-6 flex flex-col items-start justify-end z-10">
+                  <h3 className="font-display font-semibold text-2xl text-white drop-shadow-md">
+                    Direct-to-Wall <br/> Printing
+                  </h3>
+                </div>
               </Card>
 
               {/* Bottom Right: Pattern / Color Swatches */}
