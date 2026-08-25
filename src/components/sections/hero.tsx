@@ -69,7 +69,7 @@ export function Hero() {
   }, [isDragging]);
 
   return (
-    <section className="relative min-h-[100dvh] pt-28 pb-12 md:pb-16 flex flex-col items-center justify-center bg-background px-6 overflow-hidden">
+    <section className="relative pt-28 pb-12 md:pb-16 flex flex-col items-center bg-background px-6 overflow-hidden">
       
       {/* Decorative Background Elements (Hidden on mobile) */}
       <div className="absolute inset-0 pointer-events-none z-0 hidden xl:block">
