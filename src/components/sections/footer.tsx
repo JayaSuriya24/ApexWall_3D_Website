@@ -157,12 +157,12 @@ export function Footer() {
             </div>
             <div className="flex gap-3">
               {[
-                "/images/direct-to-wall.jpg",
-                "/images/architects_bg.jpg",
-              ].map((img, i) => (
-                <div key={i} className="w-20 h-20 rounded-xl overflow-hidden border border-card-border">
-                  <img src={img} alt="Instagram preview" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500 cursor-pointer" />
-                </div>
+                { src: "/images/direct-to-wall.jpg", link: "https://instagram.com/apexwall3d" },
+                { src: "/images/architects_bg.jpg", link: "https://www.instagram.com/nav_associates_/" },
+              ].map((item, i) => (
+                <a key={i} href={item.link} target="_blank" rel="noopener noreferrer" className="w-20 h-20 rounded-xl overflow-hidden border border-card-border block">
+                  <img src={item.src} alt="Instagram preview" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500 cursor-pointer" />
+                </a>
               ))}
             </div>
           </div>
