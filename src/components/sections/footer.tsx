@@ -154,13 +154,11 @@ export function Footer() {
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-between">
               <h4 className="font-semibold text-foreground text-sm uppercase tracking-wider">Instagram</h4>
-              <span className="text-primary text-sm font-medium cursor-pointer">See all</span>
             </div>
             <div className="flex gap-3">
               {[
                 "/images/direct-to-wall.jpg",
                 "/images/architects_bg.jpg",
-                "/images/interior-design.png",
               ].map((img, i) => (
                 <div key={i} className="w-20 h-20 rounded-xl overflow-hidden border border-card-border">
                   <img src={img} alt="Instagram preview" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500 cursor-pointer" />
