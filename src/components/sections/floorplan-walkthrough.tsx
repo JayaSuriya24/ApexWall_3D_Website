@@ -206,7 +206,7 @@ export function FloorplanWalkthrough() {
         </div>
 
         <div className="mt-20">
-          <PillButton asChild variant="default" className="px-10 py-4 text-lg shadow-xl shadow-primary/20">
+          <PillButton asChild variant="primary" className="px-10 py-4 text-lg shadow-xl shadow-primary/20">
             <a href="#contact">Book Your Walkthrough</a>
           </PillButton>
         </div>

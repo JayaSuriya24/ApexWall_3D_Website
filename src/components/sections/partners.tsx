@@ -17,7 +17,7 @@ export function Partners() {
               Our direct-to-wall printing technology is the perfect tool for creators who refuse to compromise on detail, scale, or elegance.
             </p>
             <div className="pt-4">
-              <PillButton asChild variant="default" className="gap-2">
+              <PillButton asChild variant="primary" className="gap-2">
                 <a href="#contact">
                   Become a Partner <ArrowUpRight className="w-4 h-4" />
                 </a>
