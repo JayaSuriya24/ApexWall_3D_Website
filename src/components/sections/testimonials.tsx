@@ -4,7 +4,15 @@ import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Star, ShieldCheck, Leaf, Factory } from "lucide-react";
 
-const TESTIMONIALS = [
+export type Testimonial = {
+  name: string;
+  location: string;
+  project: string;
+  text: string;
+  rating: number;
+};
+
+export const INITIAL_TESTIMONIALS: Testimonial[] = [
   {
     name: "Karthik R.",
     location: "Thillai Nagar, Trichy",
@@ -34,7 +42,7 @@ const TRUST_MARKS = [
   { text: "Zero Chemical Odor", icon: ShieldCheck },
 ];
 
-export function Testimonials() {
+export function Testimonials({ data = INITIAL_TESTIMONIALS }: { data?: Testimonial[] }) {
   return (
     <section className="py-12 md:py-16 relative bg-background px-6">
       <div className="mx-auto max-w-7xl flex flex-col items-center">
@@ -64,9 +72,9 @@ export function Testimonials() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 w-full mb-16">
-          {TESTIMONIALS.map((testimonial, i) => (
+          {data.map((testimonial, i) => (
             <motion.div
-              key={testimonial.name}
+              key={testimonial.name + i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}

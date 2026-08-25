@@ -7,8 +7,7 @@ import { ComparisonMatrix } from "@/components/sections/comparison-matrix";
 import { CostEstimator } from "@/components/sections/cost-estimator";
 import { ProjectGallery } from "@/components/sections/project-gallery";
 import { HowItWorks } from "@/components/sections/how-it-works";
-import { Testimonials } from "@/components/sections/testimonials";
-import { FeedbackForm } from "@/components/sections/feedback-form";
+import { TestimonialsWrapper } from "@/components/sections/testimonials-wrapper";
 import { FAQ } from "@/components/sections/faq";
 import { Footer } from "@/components/sections/footer";
 import { SplashScreen } from "@/components/ui/splash-screen";
@@ -27,8 +26,7 @@ export default function Home() {
         <CostEstimator />
         <ProjectGallery />
         <HowItWorks />
-        <Testimonials />
-        <FeedbackForm />
+        <TestimonialsWrapper />
         <FAQ />
       </main>
       <Footer />

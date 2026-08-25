@@ -6,18 +6,31 @@ import { Star, Send, CheckCircle2, MessageSquarePlus, X } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { PillButton } from "@/components/ui/pill-button";
 
-export function FeedbackForm() {
+export function FeedbackForm({ onSubmitFeedback }: { onSubmitFeedback?: (feedback: any) => void }) {
   const [isOpen, setIsOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [hoveredRating, setHoveredRating] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    
+    const formData = new FormData(e.currentTarget);
+    const newFeedback = {
+      name: formData.get("name") as string,
+      location: "Recent Client",
+      project: "Custom Wall Print",
+      text: formData.get("feedback") as string,
+      rating: rating,
+    };
+
     // Simulate API call
     setTimeout(() => {
+      if (onSubmitFeedback) {
+        onSubmitFeedback(newFeedback);
+      }
       setIsSubmitting(false);
       setIsSubmitted(true);
       
@@ -133,6 +146,7 @@ export function FeedbackForm() {
                         <input
                           type="text"
                           id="name"
+                          name="name"
                           required
                           className="w-full px-4 py-2.5 rounded-lg border border-card-border bg-card-bg focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow text-foreground"
                           placeholder="e.g. Karthik R."
@@ -143,6 +157,7 @@ export function FeedbackForm() {
                         <input
                           type="email"
                           id="email"
+                          name="email"
                           required
                           className="w-full px-4 py-2.5 rounded-lg border border-card-border bg-card-bg focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow text-foreground"
                           placeholder="hello@example.com"
@@ -154,6 +169,7 @@ export function FeedbackForm() {
                       <label htmlFor="feedback" className="text-sm font-medium text-foreground">Your Feedback</label>
                       <textarea
                         id="feedback"
+                        name="feedback"
                         required
                         rows={3}
                         className="w-full px-4 py-3 rounded-lg border border-card-border bg-card-bg focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow text-foreground resize-none"
