@@ -7,12 +7,38 @@ export function SplashScreen() {
   const [show, setShow] = useState(true);
 
   useEffect(() => {
-    // Hide splash screen after 2.5 seconds
+    // Hide splash screen after 3.2 seconds to allow the typewriter effect to finish
     const timer = setTimeout(() => {
       setShow(false);
-    }, 2500);
+    }, 3200);
     return () => clearTimeout(timer);
   }, []);
+
+  const text = "ApexWall";
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const letterVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 100,
+      },
+    },
+  };
 
   return (
     <AnimatePresence>
@@ -24,26 +50,26 @@ export function SplashScreen() {
           transition={{ duration: 0.8, ease: "easeInOut" }}
           className="fixed inset-0 z-[100] flex items-center justify-center bg-background"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{
-              duration: 1.2,
-              ease: "easeOut",
-              delay: 0.2,
-            }}
-            className="flex flex-col items-center"
-          >
-            <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight text-foreground">
-              ApexWall
-            </h1>
+          <div className="flex flex-col items-center">
+            <motion.h1
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="font-display text-7xl md:text-[9rem] font-bold tracking-tight text-foreground flex overflow-hidden py-4"
+            >
+              {text.split("").map((letter, index) => (
+                <motion.span key={index} variants={letterVariants}>
+                  {letter}
+                </motion.span>
+              ))}
+            </motion.h1>
             <motion.div
               initial={{ width: 0, opacity: 0 }}
               animate={{ width: "100%", opacity: 1 }}
-              transition={{ duration: 1, delay: 0.8, ease: "circOut" }}
-              className="h-[2px] bg-primary mt-4 rounded-full"
+              transition={{ duration: 1, delay: 1.5, ease: "circOut" }}
+              className="h-[3px] bg-primary mt-2 rounded-full origin-left"
             />
-          </motion.div>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
