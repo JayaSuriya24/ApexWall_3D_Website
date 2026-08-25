@@ -11,7 +11,6 @@ const NAV_LINKS = [
   { label: "Feature", href: "#feature" },
   { label: "Pricing", href: "#pricing" },
   { label: "Contact", href: "#contact" },
-  { label: "Login", href: "#login" },
 ];
 
 export function Navbar() {
