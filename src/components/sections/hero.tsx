@@ -58,21 +58,21 @@ export function Hero() {
         onMouseMove={handleMouseMove}
         onTouchMove={handleTouchMove}
       >
-        {/* Before Image (Bare Wall) */}
+        {/* Base Image (After / Mural) */}
         <img
-          src="/images/hero-before.jpg"
-          alt="Bare living room wall"
+          src="/images/hero-after.jpg"
+          alt="Printed floral wall art"
           className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
         />
         
-        {/* After Image (Floral Mural / Arched Gallery) */}
+        {/* Overlay Image (Before / Bare Wall) */}
         <div 
           className="absolute inset-0 overflow-hidden"
           style={{ width: `${sliderPosition}%` }}
         >
           <img
-            src="/images/hero-after.jpg"
-            alt="Printed floral wall art"
+            src="/images/hero-before.jpg"
+            alt="Bare living room wall"
             className="absolute inset-0 w-full h-full object-cover max-w-none select-none pointer-events-none"
             style={{ width: "100vw", maxWidth: "100%" }}
           />
