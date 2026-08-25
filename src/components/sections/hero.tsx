@@ -71,28 +71,34 @@ export function Hero() {
   return (
     <section className="relative min-h-[100dvh] pt-28 pb-12 md:pb-16 flex flex-col items-center justify-center bg-background px-6 overflow-hidden">
       
-      {/* Background Watermarks */}
-      <div className="absolute inset-0 pointer-events-none select-none z-0">
-        <img 
-          src="/images/palette_bg.jpg" 
-          alt="" 
-          className="absolute top-10 -left-20 w-72 h-72 md:w-[28rem] md:h-[28rem] object-cover rounded-full opacity-[0.15] mix-blend-multiply blur-[3px] -rotate-12"
-        />
-        <img 
-          src="/images/architects_bg.jpg" 
-          alt="" 
-          className="absolute top-32 -right-20 w-80 h-80 md:w-[32rem] md:h-[32rem] object-cover rounded-[4rem] opacity-[0.15] mix-blend-multiply blur-[2px]"
-        />
-        <img 
-          src="/images/walkthrough_bg.jpg" 
-          alt="" 
-          className="absolute top-[50%] -left-32 w-64 h-64 md:w-96 md:h-96 object-cover rounded-full opacity-[0.15] mix-blend-multiply blur-[4px] rotate-12"
-        />
-        <img 
-          src="/images/hero-after.jpg" 
-          alt="" 
-          className="absolute bottom-10 -right-10 w-72 h-72 md:w-[28rem] md:h-[28rem] object-cover rounded-[3rem] opacity-[0.12] mix-blend-multiply blur-[2px] -rotate-6"
-        />
+      {/* Decorative Background Elements (Hidden on mobile) */}
+      <div className="absolute inset-0 pointer-events-none z-0 hidden xl:block">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="absolute top-[15%] left-[4%] w-64 h-48 rounded-2xl overflow-hidden shadow-2xl opacity-60"
+        >
+          <img src="/images/architects_bg.jpg" alt="Architects" className="w-full h-full object-cover" />
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.4 }}
+          className="absolute top-[40%] right-[3%] w-72 h-56 rounded-2xl overflow-hidden shadow-2xl opacity-60"
+        >
+          <img src="/images/hero-after.jpg" alt="Direct to Wall Printing" className="w-full h-full object-cover" />
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="absolute bottom-[10%] left-[8%] w-56 h-40 rounded-2xl overflow-hidden shadow-2xl opacity-60"
+        >
+          <img src="/images/walkthrough_bg.jpg" alt="Real-Size 3D Walkthrough" className="w-full h-full object-cover" />
+        </motion.div>
       </div>
 
       {/* Slider Container (Frame 1 & 2 style) */}
@@ -183,7 +189,7 @@ export function Hero() {
       </div>
 
       {/* Copy below image (Frame 1 style) */}
-      <div className="mt-12 md:mt-16 text-center max-w-3xl flex flex-col items-center relative z-10">
+      <div className="mt-12 md:mt-16 text-center max-w-3xl flex flex-col items-center">
         <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground font-semibold tracking-tight leading-tight mb-6">
           Wall Art, Reimagined: <br className="hidden md:block"/> Flawless Direct-to-Wall Printing
         </h1>
