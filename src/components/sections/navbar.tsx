@@ -9,6 +9,7 @@ import { PillButton } from "@/components/ui/pill-button";
 const NAV_LINKS = [
   { label: "Home", href: "#" },
   { label: "Feature", href: "#feature" },
+  { label: "Gallery", href: "#gallery" },
   { label: "Pricing", href: "#pricing" },
   { label: "Contact", href: "#contact" },
 ];
