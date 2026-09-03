@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { Card } from "@/components/ui/card";
-import { PenTool } from "lucide-react";
+import { PenTool, PlayCircle } from "lucide-react";
+import { ArchitectVideoModal } from "@/components/ui/architect-video-modal";
 
 export function ServiceVerticals() {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
   return (
     <section id="feature" className="py-12 md:py-16 relative bg-background px-6">
       <div className="mx-auto max-w-7xl flex flex-col items-center">
@@ -22,17 +25,28 @@ export function ServiceVerticals() {
           <div className="grid md:grid-cols-2 gap-6 w-full">
             
             {/* Left Large Card: Architects & Designers */}
-            <Card className="relative overflow-hidden group aspect-square md:aspect-auto md:min-h-[500px]">
+            <Card 
+              className="relative overflow-hidden group aspect-square md:aspect-auto md:min-h-[500px] cursor-pointer"
+              onClick={() => setIsVideoOpen(true)}
+            >
               <img 
                 src="/images/architects_bg.jpg" 
                 alt="Architectural workspace"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               {/* Elegant dark overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:bg-black/40 transition-colors duration-500" />
               
-              <div className="absolute inset-0 p-8 flex flex-col items-center justify-end text-center gap-4 z-10">
-                <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center mb-2 shadow-xl">
+              {/* Play Video Icon on Hover */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                <div className="flex flex-col items-center gap-2">
+                  <PlayCircle className="w-16 h-16 text-white drop-shadow-xl" strokeWidth={1} />
+                  <span className="text-white font-medium tracking-widest uppercase text-sm drop-shadow-md">Play Video</span>
+                </div>
+              </div>
+
+              <div className="absolute inset-0 p-8 flex flex-col items-center justify-end text-center gap-4 z-10 transition-transform duration-500 group-hover:-translate-y-4">
+                <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center mb-2 shadow-xl group-hover:scale-110 transition-transform">
                   <PenTool className="w-8 h-8 text-white" strokeWidth={1.5} />
                 </div>
                 <h3 className="font-display font-semibold text-3xl text-white">
@@ -125,6 +139,11 @@ export function ServiceVerticals() {
           </Card>
         </div>
       </div>
+
+      <ArchitectVideoModal 
+        isOpen={isVideoOpen} 
+        onClose={() => setIsVideoOpen(false)} 
+      />
     </section>
   );
 }
