@@ -7,10 +7,10 @@ export function SplashScreen() {
   const [show, setShow] = useState(true);
 
   useEffect(() => {
-    // Hide splash screen after 3.2 seconds to allow the typewriter effect to finish
+    // Hide splash screen after 4.7 seconds to allow the slower printing effect to finish
     const timer = setTimeout(() => {
       setShow(false);
-    }, 3200);
+    }, 4700);
     return () => clearTimeout(timer);
   }, []);
 
@@ -58,7 +58,7 @@ export function SplashScreen() {
               <motion.div
                 initial={{ clipPath: "inset(0 100% 0 0)" }}
                 animate={{ clipPath: "inset(0 0% 0 0)" }}
-                transition={{ duration: 2, ease: "linear", delay: 0.5 }}
+                transition={{ duration: 3.5, ease: "linear", delay: 0.5 }}
                 className="whitespace-nowrap font-display text-7xl md:text-[9rem] font-bold tracking-tight text-foreground"
               >
                 ApexWall
@@ -69,8 +69,8 @@ export function SplashScreen() {
                 initial={{ left: "0%", opacity: 0 }}
                 animate={{ left: "100%", opacity: [0, 1, 1, 0] }}
                 transition={{ 
-                  left: { duration: 2, ease: "linear", delay: 0.5 },
-                  opacity: { times: [0, 0.05, 0.95, 1], duration: 2.2, delay: 0.4 }
+                  left: { duration: 3.5, ease: "linear", delay: 0.5 },
+                  opacity: { times: [0, 0.05, 0.95, 1], duration: 3.7, delay: 0.4 }
                 }}
                 className="absolute top-[-20%] bottom-[-20%] w-6 md:w-8 -ml-3 md:-ml-4 z-10 flex justify-center"
               >
@@ -104,7 +104,7 @@ export function SplashScreen() {
             <motion.div
               initial={{ width: 0, opacity: 0 }}
               animate={{ width: "100%", opacity: 1 }}
-              transition={{ duration: 1, delay: 2.7, ease: "circOut" }}
+              transition={{ duration: 1, delay: 4.2, ease: "circOut" }}
               className="h-[3px] bg-primary mt-2 rounded-full origin-left w-full"
             />
           </div>
