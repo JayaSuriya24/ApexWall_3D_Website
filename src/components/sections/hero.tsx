@@ -123,7 +123,7 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut", delay: 0.9 }}
-          className="absolute bottom-[5%] right-[25%] w-52 h-36 rounded-2xl overflow-hidden shadow-2xl opacity-60"
+          className="absolute bottom-[10%] right-[8%] w-52 h-36 rounded-2xl overflow-hidden shadow-2xl opacity-60"
         >
           <img src="/images/gallery/commercial-1.jpg" alt="Commercial Space" className="w-full h-full object-cover" />
         </motion.div>
