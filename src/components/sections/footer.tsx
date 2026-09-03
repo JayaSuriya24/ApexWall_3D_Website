@@ -48,7 +48,7 @@ export function Footer() {
         
         <div className="text-center mb-16">
           <h2 className="font-display font-semibold text-3xl md:text-4xl text-foreground">
-            Central Tamil Nadu's Premier <br className="hidden md:block"/> Wall Printing Service
+            India's Premier <br className="hidden md:block"/> Wall Printing Service
           </h2>
         </div>
 
@@ -120,14 +120,14 @@ export function Footer() {
           {/* Map */}
           <div className="w-full aspect-square md:aspect-[4/5] rounded-[24px] overflow-hidden border border-card-border relative grayscale hover:grayscale-0 transition-all duration-700">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125406.10775836262!2d78.61869811910557!3d10.815835695027581!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baaf50ff2aec587%3A0x112115994081c70e!2sTiruchirappalli%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15582312.43477815!2d70.93892790903332!3d22.9515594951474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30635ff06b92b791%3A0xd78c4fa1854213a6!2sIndia!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin" 
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
               allowFullScreen={true} 
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
-              title="Tiruchirappalli Map"
+              title="India Map"
               className="absolute inset-0"
             />
           </div>

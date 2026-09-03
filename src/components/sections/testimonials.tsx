@@ -15,7 +15,7 @@ export type Testimonial = {
 export const INITIAL_TESTIMONIALS: Testimonial[] = [];
 
 const TRUST_MARKS = [
-  { text: "Made in Tamil Nadu", icon: Factory },
+  { text: "Made in India", icon: Factory },
   { text: "Greenguard-Certified Inks", icon: Leaf },
   { text: "Zero Chemical Odor", icon: ShieldCheck },
 ];
@@ -28,7 +28,7 @@ export function Testimonials({ data = INITIAL_TESTIMONIALS }: { data?: Testimoni
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 w-full mb-12 md:mb-16">
           <div className="flex flex-col max-w-2xl">
             <h2 className="font-display font-semibold text-4xl md:text-5xl text-foreground mb-4">
-              Trusted Across Trichy.
+              Trusted Across India.
             </h2>
             <p className="text-muted text-lg">
               Don't just take our word for it. See what our clients have to say about the ApexWall finish.

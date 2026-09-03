@@ -22,11 +22,11 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: [
-    "3D wall printing Trichy",
-    "direct to wall UV printing Tamil Nadu",
+    "3D wall printing India",
+    "direct to wall UV printing India",
     "wall printer machine",
     "custom wall murals",
-    "UV printing Tiruchirappalli",
+    "UV printing India",
   ],
   openGraph: {
     type: "website",
@@ -53,8 +53,8 @@ export default function RootLayout({
     telephone: siteConfig.contact.phone,
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Tiruchirappalli",
-      addressRegion: "Tamil Nadu",
+      addressLocality: "India",
+      addressRegion: "India",
       addressCountry: "IN",
     },
     geo: {

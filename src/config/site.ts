@@ -1,25 +1,20 @@
 export const siteConfig = {
   name: "ApexWall 3D",
   description:
-    "Central Tamil Nadu's first robotic Direct-to-Wall UV Printing service. Photorealistic 1440+ DPI murals cured instantly onto plaster, wood, glass, brick, and tile.",
+    "India's premier robotic Direct-to-Wall UV Printing service. Photorealistic 1440+ DPI murals cured instantly onto plaster, wood, glass, brick, and tile.",
   url: "https://apexwall3d.com",
   contact: {
     whatsapp: "919876543210", // Placeholder WhatsApp
     phone: "+91 98765 43210", // Placeholder Phone
     email: "hello@apexwall3d.com",
   },
-  address: "Tiruchirappalli (Trichy), Tamil Nadu, India",
+  address: "India",
   geo: {
     latitude: 10.7905,
     longitude: 78.7047,
   },
   areaServed: [
-    "Tiruchirappalli",
-    "Thanjavur",
-    "Karur",
-    "Pudukkottai",
-    "Dindigul",
-    "Perambalur",
+    "Pan India",
   ],
   pricing: {
     baseRates: {

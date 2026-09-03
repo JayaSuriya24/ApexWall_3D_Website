@@ -39,7 +39,7 @@ export function Partners() {
                 </h4>
               </div>
               <p className="text-muted text-sm leading-relaxed">
-                One of the most innovative design practices in Tamil Nadu, Nav-Arc creates inspiring residential, interior, and landscape projects. Their commitment to design excellence and minimal, timeless solutions perfectly aligns with the ApexWall standard of quality.
+                One of the most innovative design practices in India, Nav-Arc creates inspiring residential, interior, and landscape projects. Their commitment to design excellence and minimal, timeless solutions perfectly aligns with the ApexWall standard of quality.
               </p>
               <a 
                 href="https://www.navarc.in/" 
