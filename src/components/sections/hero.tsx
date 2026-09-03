@@ -68,6 +68,16 @@ export function Hero() {
     };
   }, [isDragging]);
 
+  useEffect(() => {
+    if (isDragging) return;
+    
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
+    }, 30000); // 30 seconds
+    
+    return () => clearInterval(interval);
+  }, [isDragging]);
+
   return (
     <section className="relative pt-28 pb-12 md:pb-16 flex flex-col items-center bg-background px-6 overflow-hidden">
       
