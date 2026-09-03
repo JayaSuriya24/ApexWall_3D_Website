@@ -138,7 +138,7 @@ export function Footer() {
           
           <div className="flex flex-col gap-2">
             <h4 className="font-semibold text-foreground text-sm uppercase tracking-wider mb-2">Contact details</h4>
-            <p className="text-muted text-sm">{siteConfig.address}</p>
+
             <p className="text-muted text-sm">info@apexwall3d.com</p>
             <p className="text-muted text-sm">+91 9840765477</p>
             <div className="flex gap-4 mt-4 text-muted">
