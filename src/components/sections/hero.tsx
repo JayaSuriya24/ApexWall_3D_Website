@@ -73,7 +73,7 @@ export function Hero() {
     
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
-    }, 30000); // 30 seconds
+    }, 12000); // 12 seconds
     
     return () => clearInterval(interval);
   }, [isDragging]);
