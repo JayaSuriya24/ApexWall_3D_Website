@@ -7,10 +7,10 @@ export function SplashScreen() {
   const [show, setShow] = useState(true);
 
   useEffect(() => {
-    // Hide splash screen after 4.7 seconds to allow the slower printing effect to finish
+    // Hide splash screen after 6.5 seconds to allow the slower printing effect to finish
     const timer = setTimeout(() => {
       setShow(false);
-    }, 4700);
+    }, 6500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -58,7 +58,7 @@ export function SplashScreen() {
               <motion.div
                 initial={{ clipPath: "inset(0 100% 0 0)" }}
                 animate={{ clipPath: "inset(0 0% 0 0)" }}
-                transition={{ duration: 3.5, ease: "linear", delay: 0.5 }}
+                transition={{ duration: 5, ease: "easeInOut", delay: 0.5 }}
                 className="whitespace-nowrap font-display text-7xl md:text-[9rem] font-bold tracking-tight text-foreground"
               >
                 ApexWall
@@ -69,8 +69,8 @@ export function SplashScreen() {
                 initial={{ left: "0%", opacity: 0 }}
                 animate={{ left: "100%", opacity: [0, 1, 1, 0] }}
                 transition={{ 
-                  left: { duration: 3.5, ease: "linear", delay: 0.5 },
-                  opacity: { times: [0, 0.05, 0.95, 1], duration: 3.7, delay: 0.4 }
+                  left: { duration: 5, ease: "easeInOut", delay: 0.5 },
+                  opacity: { times: [0, 0.05, 0.95, 1], duration: 5.2, delay: 0.4 }
                 }}
                 className="absolute top-[-20%] bottom-[-20%] w-6 md:w-8 -ml-3 md:-ml-4 z-10 flex justify-center"
               >
@@ -80,7 +80,7 @@ export function SplashScreen() {
                   {/* The Moving Print Head Box */}
                   <motion.div 
                     animate={{ top: ["0%", "80%", "0%"] }}
-                    transition={{ repeat: Infinity, duration: 0.3, ease: "linear" }}
+                    transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
                     className="absolute left-1/2 -translate-x-1/2 w-8 h-12 md:w-10 md:h-16 bg-zinc-800 dark:bg-zinc-200 rounded-sm shadow-xl border border-zinc-600 flex items-center justify-center z-20 overflow-hidden"
                   >
                     {/* Industrial details on the print head */}
@@ -104,7 +104,7 @@ export function SplashScreen() {
             <motion.div
               initial={{ width: 0, opacity: 0 }}
               animate={{ width: "100%", opacity: 1 }}
-              transition={{ duration: 1, delay: 4.2, ease: "circOut" }}
+              transition={{ duration: 1, delay: 5.7, ease: "circOut" }}
               className="h-[3px] bg-primary mt-2 rounded-full origin-left w-full"
             />
           </div>
