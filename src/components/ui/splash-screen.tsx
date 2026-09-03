@@ -1,44 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence, Variants } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function SplashScreen() {
   const [show, setShow] = useState(true);
 
   useEffect(() => {
-    // Hide splash screen after 3.2 seconds to allow the typewriter effect to finish
+    // Hide splash screen after the printing animation is fully complete
     const timer = setTimeout(() => {
       setShow(false);
-    }, 3200);
+    }, 4000);
     return () => clearTimeout(timer);
   }, []);
 
-  const text = "ApexWall";
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const letterVariants: Variants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        type: "spring",
-        damping: 12,
-        stiffness: 100,
-      },
-    },
-  };
+  const text = "ApexWall 3D";
 
   return (
     <AnimatePresence>
@@ -48,27 +24,41 @@ export function SplashScreen() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-background"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-background overflow-hidden"
         >
-          <div className="flex flex-col items-center">
+          {/* Subtle grid background to simulate a blank wall */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+
+          <div className="relative flex items-center h-32 md:h-48 px-8">
+            {/* The Text to be revealed */}
             <motion.h1
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              className="font-display text-7xl md:text-[9rem] font-bold tracking-tight text-foreground flex overflow-hidden py-4"
+              initial={{ clipPath: "inset(0 100% 0 0)" }}
+              animate={{ clipPath: "inset(0 0% 0 0)" }}
+              transition={{ duration: 2.5, ease: "linear", delay: 0.5 }}
+              className="font-display text-5xl md:text-8xl lg:text-[9rem] font-bold tracking-tight text-foreground whitespace-nowrap"
             >
-              {text.split("").map((letter, index) => (
-                <motion.span key={index} variants={letterVariants}>
-                  {letter}
-                </motion.span>
-              ))}
+              {text}
             </motion.h1>
+
+            {/* The "Print Head" moving across */}
             <motion.div
-              initial={{ width: 0, opacity: 0 }}
-              animate={{ width: "100%", opacity: 1 }}
-              transition={{ duration: 1, delay: 1.5, ease: "circOut" }}
-              className="h-[3px] bg-primary mt-2 rounded-full origin-left"
-            />
+              initial={{ left: "32px", opacity: 0 }} // Starts at px-8 padding
+              animate={{ left: "calc(100% - 32px)", opacity: [0, 1, 1, 0] }}
+              transition={{ 
+                left: { duration: 2.5, ease: "linear", delay: 0.5 },
+                opacity: { duration: 3.2, times: [0, 0.1, 0.85, 1], delay: 0.2 }
+              }}
+              className="absolute top-0 bottom-0 w-1.5 md:w-2.5 bg-zinc-800 z-10 flex flex-col justify-between items-center py-2 shadow-2xl -translate-x-1/2"
+            >
+              {/* Simulate CMYK ink nozzles */}
+              <div className="w-full h-1/6 bg-cyan-400 animate-pulse" />
+              <div className="w-full h-1/6 bg-fuchsia-500 animate-pulse" style={{ animationDelay: "100ms" }} />
+              <div className="w-full h-1/6 bg-yellow-400 animate-pulse" style={{ animationDelay: "200ms" }} />
+              <div className="w-full h-1/6 bg-zinc-900 animate-pulse" style={{ animationDelay: "300ms" }} />
+              
+              {/* Print Head Glow */}
+              <div className="absolute inset-0 bg-primary/20 blur-md pointer-events-none" />
+            </motion.div>
           </div>
         </motion.div>
       )}
