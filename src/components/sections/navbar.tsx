@@ -1,22 +1,29 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { siteConfig } from "@/config/site";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ScanLine } from "lucide-react";
 import { PillButton } from "@/components/ui/pill-button";
 
+// Section links work from any page: on the home page they smooth-scroll,
+// elsewhere they navigate to the home page section.
 const NAV_LINKS = [
-  { label: "Home", href: "#" },
-  { label: "Feature", href: "#feature" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "Feature", href: "/#feature" },
+  { label: "Gallery", href: "/#gallery" },
+  { label: "Pricing", href: "/#pricing" },
+  { label: "Contact", href: "/#contact" },
 ];
+const PREVIEW_HREF = "/preview";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const onHome = pathname === "/";
+  const onPreview = pathname === PREVIEW_HREF;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,12 +34,15 @@ export function Navbar() {
   }, []);
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Off the home page, let the link navigate there.
+    if (!onHome) return;
     e.preventDefault();
-    
-    const targetElement = href === "#" ? document.body : document.getElementById(href.replace("#", ""));
+
+    const hash = href.split("#")[1];
+    const targetElement = hash ? document.getElementById(hash) : document.body;
     if (!targetElement) return;
 
-    const targetPosition = href === "#" ? 0 : targetElement.getBoundingClientRect().top + window.scrollY;
+    const targetPosition = hash ? targetElement.getBoundingClientRect().top + window.scrollY : 0;
     const startPosition = window.scrollY;
     const distance = targetPosition - startPosition;
     let startTime: number | null = null;
@@ -72,31 +82,38 @@ export function Navbar() {
       >
         <div className="mx-auto max-w-7xl flex items-center justify-between px-6 md:px-12">
           {/* Logo */}
-          <div className="flex items-center">
+          <Link href="/" className="flex items-center" onClick={(e) => handleSmoothScroll(e, "/")}>
             <img 
               src="/images/logo_transparent.png" 
               alt="ApexWall" 
               className="h-16 md:h-20 w-auto object-contain" 
             />
-          </div>
+          </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8">
             {NAV_LINKS.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 onClick={(e) => handleSmoothScroll(e, link.href)}
                 className="text-sm font-medium text-foreground hover:text-primary transition-colors cursor-pointer"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
           {/* Desktop Actions */}
           <div className="hidden lg:flex items-center">
-            {/* Removed Contact Button */}
+            {!onPreview && (
+              <PillButton asChild variant="primary" className="gap-2">
+                <Link href={PREVIEW_HREF}>
+                  <ScanLine className="w-4 h-4" aria-hidden="true" />
+                  Preview on Your Wall
+                </Link>
+              </PillButton>
+            )}
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -121,7 +138,7 @@ export function Navbar() {
           >
             <nav className="flex flex-col gap-6 px-6 overflow-y-auto">
               {NAV_LINKS.map((link) => (
-                <a
+                <Link
                   key={link.label}
                   href={link.href}
                   onClick={(e) => {
@@ -131,10 +148,17 @@ export function Navbar() {
                   className="text-2xl font-display font-medium text-foreground hover:text-primary transition-colors border-b border-card-border pb-4 cursor-pointer"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
-              <div className="mt-8">
-                {/* Removed Mobile Contact Button */}
+              <div className="mt-4 pb-8">
+                {!onPreview && (
+                  <PillButton asChild variant="primary" className="w-full gap-2 py-3.5">
+                    <Link href={PREVIEW_HREF} onClick={() => setIsMobileMenuOpen(false)}>
+                      <ScanLine className="w-4 h-4" aria-hidden="true" />
+                      Preview on Your Wall
+                    </Link>
+                  </PillButton>
+                )}
               </div>
             </nav>
           </motion.div>

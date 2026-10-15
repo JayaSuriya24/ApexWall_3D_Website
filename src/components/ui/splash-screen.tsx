@@ -3,12 +3,17 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 
+// Survives client-side navigation, so returning to the home page from another page
+// (e.g. /preview) doesn't replay the intro. A full page load still plays it.
+let hasPlayed = false;
+
 export function SplashScreen() {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(() => !hasPlayed);
 
   useEffect(() => {
     // Hide splash screen after 6.5 seconds to allow the slower printing effect to finish
     const timer = setTimeout(() => {
+      hasPlayed = true;
       setShow(false);
     }, 6500);
     return () => clearTimeout(timer);
