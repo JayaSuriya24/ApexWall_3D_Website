@@ -16,7 +16,7 @@ export default function PreviewPage() {
       <main className="flex-1 bg-background px-4 pb-16 pt-28 sm:px-6 md:pt-32">
         <div className="mx-auto max-w-7xl">
           <header className="mx-auto mb-8 max-w-2xl text-center md:mb-10">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-primary">Wall Preview</p>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-primary-strong">Wall Preview</p>
             <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
               Preview on Your Wall
             </h1>

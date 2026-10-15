@@ -9,7 +9,6 @@ export const INKS = Object.keys(siteConfig.pricing.inkAddOns) as Ink[];
 /**
  * Rate per sq ft = surface base rate + ink add-on, from siteConfig.pricing.
  * `fillRatio` is the share of the width × height box that is printed (≈0.785 for a circle).
- * siteConfig.pricing.multipliers is not applied; confirm with the business whether it should be.
  */
 export function estimatePrice({
   widthFt,

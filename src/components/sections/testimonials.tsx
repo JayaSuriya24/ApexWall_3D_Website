@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
+import { siteConfig } from "@/config/site";
 import { Star, ShieldCheck, Leaf, Factory } from "lucide-react";
 
 export type Testimonial = {
@@ -43,18 +44,25 @@ export function Testimonials({ data = INITIAL_TESTIMONIALS }: { data?: Testimoni
             </p>
           </div>
           
-          {/* Google Review Badge */}
-          <div className="flex flex-col items-start md:items-end gap-2 shrink-0">
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-              ))}
-            </div>
-            <div className="text-sm text-foreground font-semibold">
-              <span className="text-xl font-bold">5.0</span> / 5.0 Average Rating
-            </div>
-            <span className="text-xs text-muted">Based on 45+ Google Reviews</span>
-          </div>
+          {/* Google Review Badge: only shown with a link to the reviews it summarises */}
+          {siteConfig.contact.googleReviewsUrl && (
+            <a
+              href={siteConfig.contact.googleReviewsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-start md:items-end gap-2 shrink-0 rounded-xl hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              <div className="flex items-center gap-1" aria-hidden="true">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                ))}
+              </div>
+              <div className="text-sm text-foreground font-semibold">
+                <span className="text-xl font-bold">5.0</span> / 5.0 Average Rating
+              </div>
+              <span className="text-xs text-muted underline">Based on 45+ Google Reviews</span>
+            </a>
+          )}
         </div>
 
         {data.length === 0 ? (

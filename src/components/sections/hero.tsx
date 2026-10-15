@@ -171,7 +171,7 @@ export function Hero() {
           onMouseMove={handleMouseMove}
           onTouchMove={handleTouchMove}
         >
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={currentSlide}
               initial={{ opacity: 0 }}
@@ -208,38 +208,44 @@ export function Hero() {
             className="absolute top-0 bottom-0 w-1 bg-primary z-10 flex items-center justify-center shadow-xl transition-transform duration-75"
             style={{ left: `${sliderPosition}%`, transform: "translateX(-50%)" }}
           >
-            <div className="bg-primary text-white text-xs font-medium tracking-wide uppercase px-4 py-2 rounded-full whitespace-nowrap shadow-lg select-none pointer-events-none">
+            <div className="bg-primary-strong text-white text-xs font-medium tracking-wide uppercase px-4 py-2 rounded-full whitespace-nowrap shadow-lg select-none pointer-events-none">
               {sliderPosition === 50 ? "Before/After" : "Drag to Transform"}
             </div>
           </div>
         </div>
 
         {/* Slideshow Controls */}
-        <div className="flex items-center gap-6 mt-4">
+        <div className="flex items-center gap-3 mt-4">
           <button 
             onClick={prevSlide}
-            className="p-2 rounded-full bg-white border border-[#ECE5D8] shadow-sm hover:bg-gray-50 transition-colors text-foreground"
+            className="p-2.5 rounded-full bg-white border border-[#ECE5D8] shadow-sm hover:bg-gray-50 transition-colors text-foreground"
             aria-label="Previous Slide"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           
-          <div className="flex gap-3">
+          <div className="flex">
+            {/* 40px tap area around each small dot */}
             {SLIDES.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                  currentSlide === index ? "bg-primary scale-125" : "bg-[#ECE5D8] hover:bg-gray-300"
-                }`}
+                className="group flex h-10 w-10 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 aria-label={`Go to slide ${index + 1}`}
-              />
+                aria-current={currentSlide === index}
+              >
+                <span
+                  className={`block w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                    currentSlide === index ? "bg-primary scale-125" : "bg-[#ECE5D8] group-hover:bg-gray-300"
+                  }`}
+                />
+              </button>
             ))}
           </div>
 
           <button 
             onClick={nextSlide}
-            className="p-2 rounded-full bg-white border border-[#ECE5D8] shadow-sm hover:bg-gray-50 transition-colors text-foreground"
+            className="p-2.5 rounded-full bg-white border border-[#ECE5D8] shadow-sm hover:bg-gray-50 transition-colors text-foreground"
             aria-label="Next Slide"
           >
             <ChevronRight className="w-5 h-5" />

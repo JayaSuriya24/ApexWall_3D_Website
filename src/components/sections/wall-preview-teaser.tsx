@@ -24,7 +24,7 @@ export function WallPreviewTeaser() {
       <div className="mx-auto max-w-6xl">
         <Card className="grid items-center gap-10 overflow-hidden p-6 md:p-10 lg:grid-cols-2 lg:gap-14 lg:p-12">
           <div className="flex flex-col items-start">
-            <span className="mb-4 rounded-full bg-highlight px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
+            <span className="mb-4 rounded-full bg-highlight px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary-strong">
               New · Wall Preview
             </span>
             <h2 className="font-display text-3xl font-semibold leading-tight text-foreground md:text-4xl lg:text-5xl">

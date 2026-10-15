@@ -105,7 +105,7 @@ export function Navbar() {
                 key={link.label}
                 href={link.href}
                 onClick={(e) => handleSmoothScroll(e, link.href)}
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors cursor-pointer"
+                className="text-sm font-medium text-foreground hover:text-primary-strong transition-colors cursor-pointer"
               >
                 {link.label}
               </Link>
@@ -156,7 +156,7 @@ export function Navbar() {
                     handleSmoothScroll(e, link.href);
                     setIsMobileMenuOpen(false);
                   }}
-                  className="text-2xl font-display font-medium text-foreground hover:text-primary transition-colors border-b border-card-border pb-4 cursor-pointer"
+                  className="text-2xl font-display font-medium text-foreground hover:text-primary-strong transition-colors border-b border-card-border pb-4 cursor-pointer"
                 >
                   {link.label}
                 </Link>

@@ -25,7 +25,6 @@ export const metadata: Metadata = {
   keywords: [
     "3D wall printing India",
     "direct to wall UV printing India",
-    "wall printer machine",
     "custom wall murals",
     "UV printing India",
   ],

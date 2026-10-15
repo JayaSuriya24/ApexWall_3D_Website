@@ -76,7 +76,7 @@ export function HowItWorks() {
 
                   {/* Number Pill (on the line) */}
                   <div className="absolute left-6 md:left-1/2 top-0 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-background border-[4px] border-card-border shadow-sm">
-                    <span className="font-display font-bold text-xl md:text-2xl text-primary">
+                    <span className="font-display font-bold text-xl md:text-2xl text-primary-strong">
                       {step.id}
                     </span>
                   </div>

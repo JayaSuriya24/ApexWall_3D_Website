@@ -97,7 +97,7 @@ export function FloorplanWalkthrough() {
                 }}
               >
                 <div className="flex flex-col items-center gap-2">
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-colors ${activeStep === index ? "border-primary text-primary" : "border-card-border text-muted"}`}>
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-colors ${activeStep === index ? "border-primary text-primary-strong" : "border-card-border text-muted"}`}>
                     <span className="font-display font-bold text-lg">{stage.num}</span>
                   </div>
                   {index < STAGES.length - 1 && <div className="w-px h-16 bg-card-border" />}
