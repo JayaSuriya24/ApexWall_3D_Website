@@ -1,34 +1,39 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
+import Image from "next/image";
 import { PillButton } from "@/components/ui/pill-button";
 import { siteConfig } from "@/config/site";
+import { submitForm } from "@/lib/submit-form";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
+const WHATSAPP_BOOKING = `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent("Hi! I would like to book a walkthrough.")}`;
 
 export function Footer() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setHasError(false);
 
     const form = e.currentTarget;
     const formData = new FormData(form);
 
     try {
-      await fetch(form.action, {
-        method: form.method,
-        body: formData,
-        headers: {
-          Accept: "application/json",
-        },
+      // Only thank the visitor once the form service has actually accepted the message.
+      await submitForm({
+        _subject: "New Website Enquiry - ApexWall 3D",
+        name: String(formData.get("name") ?? ""),
+        email: String(formData.get("email") ?? ""),
+        message: String(formData.get("message") ?? ""),
       });
       setIsSubmitted(true);
       form.reset();
-    } catch (error) {
-      console.error("Form submission error", error);
+    } catch {
+      setHasError(true);
     } finally {
       setIsSubmitting(false);
     }
@@ -48,7 +53,7 @@ export function Footer() {
         
         <div className="text-center mb-16">
           <h2 className="font-display font-semibold text-3xl md:text-4xl text-foreground">
-            India's Premier <br className="hidden md:block"/> Wall Printing Service
+            India&apos;s Premier <br className="hidden md:block"/> Wall Printing Service
           </h2>
         </div>
 
@@ -69,7 +74,7 @@ export function Footer() {
               </p>
               
               <a 
-                href="https://wa.me/919840765477?text=Hi!%20I%20would%20like%20to%20book%20a%20walkthrough."
+                href={WHATSAPP_BOOKING}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#128C7E] text-white font-medium px-8 py-4 rounded-full transition-colors shadow-lg shadow-[#25D366]/20"
@@ -95,14 +100,14 @@ export function Footer() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3 }}
-                  className="flex flex-col gap-4" 
-                  action="https://formsubmit.co/jayasuriyamanickavasagam@gmail.com" 
-                  method="POST"
+                  className="flex flex-col gap-4"
                   onSubmit={handleSubmit}
                 >
                   <input 
                     type="text"
                     name="name"
+                    aria-label="Name"
+                    autoComplete="name"
                     required 
                     placeholder="Name" 
                     className="w-full bg-card-bg border border-card-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted/60 focus:outline-none focus:border-primary transition-colors" 
@@ -110,20 +115,30 @@ export function Footer() {
                   <input 
                     type="email" 
                     name="email"
+                    aria-label="Email"
+                    autoComplete="email"
                     required
                     placeholder="Email" 
                     className="w-full bg-card-bg border border-card-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted/60 focus:outline-none focus:border-primary transition-colors" 
                   />
                   <textarea 
                     name="message"
+                    aria-label="Message"
                     required
                     rows={4} 
                     placeholder="Message" 
                     className="w-full bg-card-bg border border-card-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted/60 focus:outline-none focus:border-primary transition-colors resize-none" 
                   />
-                  <input type="hidden" name="_captcha" value="false" />
-                  <input type="hidden" name="_subject" value="New Website Enquiry - ApexWall 3D" />
-                  
+                  {hasError && (
+                    <p role="alert" className="text-sm text-[#b5523b]">
+                      Sorry, your message couldn&apos;t be sent. Please try again, or{" "}
+                      <a href={WHATSAPP_BOOKING} target="_blank" rel="noopener noreferrer" className="underline">
+                        message us on WhatsApp
+                      </a>
+                      .
+                    </p>
+                  )}
+
                   <PillButton type="submit" variant="outline" className="w-full mt-2" disabled={isSubmitting}>
                     {isSubmitting ? "Sending..." : "Submit"}
                   </PillButton>
@@ -156,15 +171,16 @@ export function Footer() {
           <div className="flex flex-col gap-2">
             <h4 className="font-semibold text-foreground text-sm uppercase tracking-wider mb-2">Contact details</h4>
 
-            <p className="text-muted text-sm">info@apexwall3d.com</p>
-            <p className="text-muted text-sm">+91 9840765477</p>
+            <a href={`mailto:${siteConfig.contact.email}`} className="text-muted text-sm hover:text-foreground transition-colors">
+              {siteConfig.contact.email}
+            </a>
+            <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`} className="text-muted text-sm hover:text-foreground transition-colors">
+              {siteConfig.contact.phone}
+            </a>
             <div className="flex gap-4 mt-4 text-muted">
-              {/* FB SVG */}
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 hover:text-foreground cursor-pointer transition-colors"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-              {/* IG SVG */}
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 hover:text-foreground cursor-pointer transition-colors"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-              {/* YT SVG */}
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 hover:text-foreground cursor-pointer transition-colors"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+              <a href={siteConfig.contact.instagram} target="_blank" rel="noopener noreferrer" aria-label="ApexWall on Instagram" className="hover:text-foreground transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
             </div>
           </div>
 
@@ -174,11 +190,12 @@ export function Footer() {
             </div>
             <div className="flex gap-3">
               {[
-                { src: "/images/direct-to-wall.jpg", link: "https://instagram.com/apexwall3d", name: "ApexWall 3D" },
+                { src: "/images/direct-to-wall.jpg", link: siteConfig.contact.instagram, name: "ApexWall 3D" },
+                { src: "/images/interior-design.png", link: "https://www.instagram.com/akr_ventures/", name: "AKR Ventures" },
                 { src: "/images/architects_bg.jpg", link: "https://www.instagram.com/nav_associates_/", name: "Nav-Arc" },
               ].map((item, i) => (
                 <a key={i} href={item.link} target="_blank" rel="noopener noreferrer" className="relative w-20 h-20 rounded-xl overflow-hidden border border-card-border block group">
-                  <img src={item.src} alt="Instagram preview" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer" />
+                  <Image src={item.src} alt={`${item.name} on Instagram`} fill sizes="80px" className="object-cover group-hover:scale-110 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <span className="text-white text-xs font-medium text-center px-1">{item.name}</span>
                   </div>

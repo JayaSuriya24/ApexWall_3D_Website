@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import Image from "next/image";
 import {
   Download,
   ImagePlus,
@@ -513,8 +514,9 @@ export function WallPreviewEditor() {
                   disabled={busy === "wall"}
                   className="group overflow-hidden rounded-xl border border-card-border bg-card-bg text-left transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50"
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={room.src} alt="" className="aspect-[4/3] w-full object-cover" />
+                  <span className="relative block aspect-[4/3] w-full">
+                    <Image src={room.src} alt="" fill sizes="160px" className="object-cover" />
+                  </span>
                   <span className="block px-2 py-1.5 text-[11px] font-medium text-foreground sm:text-xs">{room.title}</span>
                 </button>
               ))}

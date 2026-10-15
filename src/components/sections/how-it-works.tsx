@@ -40,28 +40,32 @@ export function HowItWorks() {
     <section id="process" className="py-12 md:py-16 bg-background px-6">
       <div className="mx-auto max-w-4xl flex flex-col items-center">
         
-        <h2 className="font-display font-semibold text-4xl md:text-5xl text-foreground mb-20">
+        <h2 className="font-display font-semibold text-4xl md:text-5xl text-foreground mb-12 md:mb-20 text-center">
           Process Timeline
         </h2>
 
+        {/* Phones: line on the left, text full width. md+: centred line, steps alternate sides
+            with the text sitting next to the line. */}
         <div className="relative w-full" ref={containerRef}>
           {/* Background Line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-card-border -translate-x-1/2" />
-          
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-card-border -translate-x-1/2" />
+
           {/* Animated Fill Line */}
-          <motion.div 
-            className="absolute left-1/2 top-0 w-[2px] bg-primary -translate-x-1/2 origin-top"
+          <motion.div
+            className="absolute left-6 md:left-1/2 top-0 w-[2px] bg-primary -translate-x-1/2 origin-top"
             style={{ height: lineHeight }}
           />
 
-          <div className="flex flex-col gap-24 relative z-10">
+          <ol className="flex flex-col gap-12 md:gap-24 relative z-10">
             {STEPS.map((step, index) => {
               const isEven = index % 2 === 0;
               return (
-                <div key={step.id} className="relative flex items-center justify-center w-full">
-                  
-                  {/* Content (Alternating) */}
-                  <div className={`w-1/2 px-8 md:px-12 ${isEven ? 'text-right pr-12 md:pr-16 ml-auto order-1' : 'text-left pl-12 md:pl-16 mr-auto order-2'}`}>
+                <li key={step.id} className="relative flex items-center min-h-12 md:min-h-16">
+                  <div
+                    className={`w-full pl-20 text-left md:w-1/2 ${
+                      isEven ? "md:mr-auto md:pl-0 md:pr-16 md:text-right" : "md:ml-auto md:pl-16"
+                    }`}
+                  >
                     <h3 className="font-display font-semibold text-xl md:text-2xl text-foreground mb-2">
                       {step.title}
                     </h3>
@@ -70,17 +74,16 @@ export function HowItWorks() {
                     </p>
                   </div>
 
-                  {/* Number Pill (Center) */}
-                  <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-background border-[4px] border-card-border shadow-sm">
+                  {/* Number Pill (on the line) */}
+                  <div className="absolute left-6 md:left-1/2 top-0 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-background border-[4px] border-card-border shadow-sm">
                     <span className="font-display font-bold text-xl md:text-2xl text-primary">
                       {step.id}
                     </span>
                   </div>
-
-                </div>
+                </li>
               );
             })}
-          </div>
+          </ol>
         </div>
       </div>
     </section>

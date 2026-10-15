@@ -4,7 +4,6 @@ import { ServiceVerticals } from "@/components/sections/service-verticals";
 import { Partners } from "@/components/sections/partners";
 import { FloorplanWalkthrough } from "@/components/sections/floorplan-walkthrough";
 import { ComparisonMatrix } from "@/components/sections/comparison-matrix";
-import { CostEstimator } from "@/components/sections/cost-estimator";
 import { ProjectGallery } from "@/components/sections/project-gallery";
 import { WallPreviewTeaser } from "@/components/sections/wall-preview-teaser";
 import { HowItWorks } from "@/components/sections/how-it-works";
@@ -24,7 +23,6 @@ export default function Home() {
         <Partners />
         <FloorplanWalkthrough />
         <ComparisonMatrix />
-        <CostEstimator />
         <ProjectGallery />
         <WallPreviewTeaser />
         <HowItWorks />

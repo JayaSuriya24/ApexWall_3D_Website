@@ -91,3 +91,20 @@
     pointer-events: none;
   }
 }
+
+@layer base {
+  /* Keep section headings clear of the fixed navbar when jumping to #anchors */
+  :root {
+    --nav-offset: 6rem;
+  }
+  section[id],
+  footer[id] {
+    scroll-margin-top: var(--nav-offset);
+  }
+}
+
+/* The intro animation already played this session (set before hydration in layout.tsx).
+   Unlayered on purpose so it beats the splash's own Tailwind display utility. */
+html[data-splash-seen] [data-splash] {
+  display: none;
+}

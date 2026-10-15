@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Camera, MessageCircle, Palette, ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
@@ -66,22 +67,15 @@ export function WallPreviewTeaser() {
             aria-label="Open the wall preview: a living room wall shown bare and then with a floral mural"
             className="group relative order-first block aspect-square overflow-hidden rounded-[20px] border border-card-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary sm:aspect-[4/3] lg:order-none lg:aspect-square"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element -- matches the rest of the site */}
-            <img
-              src="/images/hero-before.jpg"
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover"
-              loading="lazy"
-            />
-            <motion.img
-              src="/images/hero-after.jpg"
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover"
-              loading="lazy"
+            <Image src="/images/hero-before.jpg" alt="" fill sizes="(max-width: 1024px) 100vw, 560px" className="object-cover" />
+            <motion.div
+              className="absolute inset-0"
               initial={{ opacity: reduceMotion ? 1 : 0 }}
               animate={reduceMotion ? { opacity: 1 } : { opacity: [0, 0, 1, 1, 0] }}
               transition={reduceMotion ? undefined : { duration: 7, times: [0, 0.2, 0.35, 0.85, 1], repeat: Infinity }}
-            />
+            >
+              <Image src="/images/hero-after.jpg" alt="" fill sizes="(max-width: 1024px) 100vw, 560px" className="object-cover" />
+            </motion.div>
             <div
               className="pointer-events-none absolute border-2 border-dashed border-primary"
               style={{

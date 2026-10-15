@@ -1,95 +1,74 @@
-import { render, screen, fireEvent, cleanup } from "@testing-library/react";
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { TestimonialsWrapper } from "./testimonials-wrapper";
+import { render, screen, fireEvent, cleanup, waitFor } from "@testing-library/react";
+import { describe, it, expect, afterEach, beforeEach, vi } from "vitest";
+import { Testimonials, type Testimonial } from "./testimonials";
+import { FeedbackForm } from "./feedback-form";
 
-// Mock the child components to simplify testing the wrapper logic
-vi.mock("./testimonials", () => ({
-  Testimonials: ({ data }: { data: any }) => (
-    <div data-testid="testimonials-mock">
-      {data.map((t: any, i: number) => (
-        <div key={i} data-testid="testimonial-item">
-          {t.name} - {t.content}
-        </div>
-      ))}
-    </div>
-  ),
-  INITIAL_TESTIMONIALS: [{ name: "Initial User", content: "Initial Content", role: "Role", location: "Loc", rating: 5 }]
-}));
+const review: Testimonial = { name: "Priya S.", location: "Chennai", project: "Living room mural", text: "Stunning finish", rating: 5 };
 
-vi.mock("./feedback-form", () => ({
-  FeedbackForm: ({ onSubmitFeedback }: { onSubmitFeedback: any }) => (
-    <button
-      data-testid="add-feedback-btn"
-      onClick={() =>
-        onSubmitFeedback({
-          name: "New User",
-          content: "New Content",
-          role: "New Role",
-          location: "New Loc",
-          rating: 5,
-        })
-      }
-    >
-      Add Feedback
-    </button>
-  ),
-}));
+// jsdom has no IntersectionObserver; framer-motion's whileInView needs one.
+beforeEach(() => {
+  vi.stubGlobal(
+    "IntersectionObserver",
+    class {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    },
+  );
+});
 
-describe("TestimonialsWrapper", () => {
-  let store: Record<string, string> = {};
+afterEach(() => {
+  cleanup();
+  vi.unstubAllGlobals();
+});
 
-  beforeEach(() => {
-    store = {};
-    vi.stubGlobal("localStorage", {
-      getItem: (key: string) => store[key] || null,
-      setItem: (key: string, value: string) => {
-        store[key] = value.toString();
-      },
-      clear: () => {
-        store = {};
-      },
-    });
-    vi.clearAllMocks();
+describe("Testimonials", () => {
+  it("shows an invitation instead of an empty carousel when there are no reviews", () => {
+    render(<Testimonials data={[]} />);
+    expect(screen.getByText(/We'd love to hear how it went/)).toBeDefined();
+    expect(screen.queryByLabelText("Next reviews")).toBeNull();
   });
 
-  afterEach(() => {
-    cleanup();
+  it("renders curated reviews with labelled scroll buttons", () => {
+    render(<Testimonials data={[review]} />);
+    expect(screen.getByText("Priya S.")).toBeDefined();
+    expect(screen.getByLabelText("5 out of 5 stars")).toBeDefined();
+    expect(screen.getByLabelText("Next reviews")).toBeDefined();
+  });
+});
+
+function fillAndSubmit() {
+  fireEvent.click(screen.getByText("Leave Feedback"));
+  fireEvent.click(screen.getByLabelText("4 stars"));
+  fireEvent.change(screen.getByLabelText("Name"), { target: { value: "Karthik" } });
+  fireEvent.change(screen.getByLabelText("Email"), { target: { value: "k@example.com" } });
+  fireEvent.change(screen.getByLabelText("Your Feedback"), { target: { value: "Great work" } });
+  fireEvent.click(screen.getByText("Submit Feedback"));
+}
+
+describe("FeedbackForm", () => {
+  it("needs a star rating before it can be submitted", () => {
+    render(<FeedbackForm />);
+    fireEvent.click(screen.getByText("Leave Feedback"));
+    expect(screen.getByText("Choose a star rating to continue.")).toBeDefined();
+    expect((screen.getByText("Submit Feedback").closest("button") as HTMLButtonElement).disabled).toBe(true);
   });
 
-  it("renders initial testimonials when localStorage is empty", () => {
-    render(<TestimonialsWrapper />);
-    expect(screen.getByTestId("testimonials-mock")).toBeDefined();
-    expect(screen.getByText("Initial User - Initial Content")).toBeDefined();
+  it("sends the feedback to the business inbox and thanks the visitor", async () => {
+    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({ success: "true" }), { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+    render(<FeedbackForm />);
+    fillAndSubmit();
+    await waitFor(() => expect(screen.getByText("Thank you!")).toBeDefined());
+    const body = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(body).toMatchObject({ name: "Karthik", email: "k@example.com", feedback: "Great work", rating: "4 / 5" });
   });
 
-  it("loads testimonials from localStorage if available", () => {
-    const savedData = [
-      {
-        name: "Saved User",
-        content: "Saved Content",
-        role: "Saved Role",
-        location: "Saved Loc",
-        rating: 5,
-      },
-    ];
-    localStorage.setItem("apexwall-feedback", JSON.stringify(savedData));
-
-    render(<TestimonialsWrapper />);
-    expect(screen.getByText("Saved User - Saved Content")).toBeDefined();
-    // It shouldn't render the initial one if localStorage overrides it
-  });
-
-  it("adds new feedback and saves to localStorage", () => {
-    render(<TestimonialsWrapper />);
-    
-    const addBtn = screen.getByTestId("add-feedback-btn");
-    fireEvent.click(addBtn);
-
-    // It should now render the new user
-    expect(screen.getByText("New User - New Content")).toBeDefined();
-
-    // It should have saved it to localStorage
-    const saved = JSON.parse(localStorage.getItem("apexwall-feedback") || "[]");
-    expect(saved[0].name).toBe("New User");
+  it("shows an error, not a thank-you, when sending fails", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response("", { status: 500 })));
+    render(<FeedbackForm />);
+    fillAndSubmit();
+    await waitFor(() => expect(screen.getByRole("alert").textContent).toMatch(/couldn't send/));
+    expect(screen.queryByText("Thank you!")).toBeNull();
   });
 });

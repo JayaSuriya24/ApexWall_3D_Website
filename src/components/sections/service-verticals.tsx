@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { PenTool, PlayCircle } from "lucide-react";
 import { ArchitectVideoModal } from "@/components/ui/architect-video-modal";
@@ -15,8 +16,8 @@ export function ServiceVerticals() {
             Customization for Visionaries: <br/> A Partnership in Precision
           </h2>
           <p className="text-muted text-base md:text-lg">
-            Instead of tech cards to create centerpieces sedolation <br className="hidden md:block"/>
-            professional, classic, and elegant designs.
+            We work with architects, designers and homeowners to turn bare walls into <br className="hidden md:block"/>
+            professional, classic, and elegant centrepieces.
           </p>
         </div>
 
@@ -25,20 +26,20 @@ export function ServiceVerticals() {
           <div className="grid md:grid-cols-2 gap-6 w-full">
             
             {/* Left Large Card: Architects & Designers */}
-            <Card 
-              className="relative overflow-hidden group aspect-square md:aspect-auto md:min-h-[500px] cursor-pointer"
-              onClick={() => setIsVideoOpen(true)}
-            >
-              <img 
-                src="/images/architects_bg.jpg" 
-                alt="Architectural workspace"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            <Card className="relative overflow-hidden group aspect-square md:aspect-auto md:min-h-[500px] cursor-pointer focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2">
+              {/* Full-card button: keyboard and screen-reader accessible */}
+              <button
+                type="button"
+                onClick={() => setIsVideoOpen(true)}
+                aria-label="Play the video for architects and designers"
+                className="absolute inset-0 z-30 h-full w-full cursor-pointer focus:outline-none"
               />
+              <Image src="/images/architects_bg.jpg" alt="Architectural workspace" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
               {/* Elegant dark overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:bg-black/40 transition-colors duration-500" />
               
-              {/* Play Video Icon on Hover */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+              {/* Play Video Icon: on hover/focus, always shown on touch screens (no hover there) */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 pointer-coarse:opacity-100 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300 z-20">
                 <div className="flex flex-col items-center gap-2">
                   <PlayCircle className="w-16 h-16 text-white drop-shadow-xl" strokeWidth={1} />
                   <span className="text-white font-medium tracking-widest uppercase text-sm drop-shadow-md">Play Video</span>
@@ -60,11 +61,7 @@ export function ServiceVerticals() {
               
               {/* Top Right: Direct-to-Wall Printing */}
               <Card className="p-0 overflow-hidden h-[300px] relative group border-0 shadow-md">
-                <img 
-                  src="/images/direct-to-wall.jpg" 
-                  alt="Direct-to-Wall Printing in action"
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
+                <Image src="/images/direct-to-wall.jpg" alt="Direct-to-Wall Printing in action" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                 <div className="absolute inset-0 p-6 flex flex-col items-start justify-end z-10">
                   <h3 className="font-display font-semibold text-2xl text-white drop-shadow-md">
@@ -76,11 +73,7 @@ export function ServiceVerticals() {
               {/* Bottom Right: Pattern / Color Swatches */}
               <div className="grid grid-cols-2 gap-6 h-[250px]">
                 <Card className="relative overflow-hidden group border-0 shadow-md">
-                  <img 
-                    src="/images/interior-design.png" 
-                    alt="Interior Design"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+                  <Image src="/images/interior-design.png" alt="Interior Design" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-500" />
                   <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-center p-4">
                     <h3 className="font-display font-semibold text-lg md:text-xl text-white leading-tight drop-shadow-md">
@@ -89,11 +82,7 @@ export function ServiceVerticals() {
                   </div>
                 </Card>
                 <Card className="relative overflow-hidden group border-0 shadow-md">
-                  <img 
-                    src="/images/palette_bg.jpg" 
-                    alt="Design material swatches"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+                  <Image src="/images/palette_bg.jpg" alt="Design material swatches" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-500" />
                   <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-center p-4">
                     <h3 className="font-display font-semibold text-lg md:text-xl text-white leading-tight drop-shadow-md">
@@ -107,11 +96,7 @@ export function ServiceVerticals() {
 
           {/* Bottom Full-Width Card: Real-Size 3D Walkthrough */}
           <Card className="relative overflow-hidden group min-h-[400px] md:min-h-[500px] border-0 shadow-md flex items-end">
-            <img 
-              src="/images/walkthrough_bg.jpg" 
-              alt="Real-Size 3D Floorplan Walkthrough"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
+            <Image src="/images/walkthrough_bg.jpg" alt="Real-Size 3D Floorplan Walkthrough" fill sizes="(max-width: 768px) 100vw, 1024px" className="object-cover transition-transform duration-700 group-hover:scale-105" />
             {/* Elegant dark gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
             

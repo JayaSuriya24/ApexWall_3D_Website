@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Map, Footprints, Layers, Expand, CheckCircle2, ShieldCheck } from "lucide-react";
 import { PillButton } from "@/components/ui/pill-button";
@@ -53,12 +54,13 @@ const BENEFITS = [
 export function FloorplanWalkthrough() {
   const [activeStep, setActiveStep] = useState(0);
 
+  // Restarts whenever the step changes, so a step picked by the visitor stays for the full 4 seconds
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveStep((prev) => (prev + 1) % 3);
+    const timer = setTimeout(() => {
+      setActiveStep((prev) => (prev + 1) % STAGES.length);
     }, 4000);
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearTimeout(timer);
+  }, [activeStep]);
 
   return (
     <section id="3d-walkthrough" className="py-24 md:py-32 bg-card-bg px-6 border-y border-card-border overflow-hidden">
@@ -80,10 +82,19 @@ export function FloorplanWalkthrough() {
           {/* Text Steps */}
           <div className="flex-1 space-y-8">
             {STAGES.map((stage, index) => (
-              <div 
-                key={index} 
-                className={`flex gap-6 transition-all duration-500 cursor-pointer ${activeStep === index ? "opacity-100 translate-x-2" : "opacity-40 hover:opacity-70"}`}
+              <div
+                key={index}
+                role="button"
+                tabIndex={0}
+                aria-pressed={activeStep === index}
+                className={`flex gap-6 rounded-2xl transition-all duration-500 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${activeStep === index ? "opacity-100 translate-x-2" : "opacity-40 hover:opacity-70"}`}
                 onClick={() => setActiveStep(index)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setActiveStep(index);
+                  }
+                }}
               >
                 <div className="flex flex-col items-center gap-2">
                   <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-colors ${activeStep === index ? "border-primary text-primary" : "border-card-border text-muted"}`}>
@@ -158,14 +169,20 @@ export function FloorplanWalkthrough() {
                   className="absolute inset-0"
                 >
                   {/* Full Scale representation */}
-                  <motion.img 
-                    initial={{ opacity: 0, scale: 1.1 }} 
-                    animate={{ opacity: 1, scale: 1 }} 
+                  <motion.div
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 2, ease: "easeOut" }}
-                    src="/images/walkthrough_bg.jpg"
-                    alt="Full scale walkthrough"
-                    className="w-full h-full object-cover"
-                  />
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src="/images/walkthrough_bg.jpg"
+                      alt="Full scale walkthrough"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover"
+                    />
+                  </motion.div>
                   <div className="absolute inset-0 bg-black/20" />
                   <motion.div 
                     initial={{ opacity: 0, y: 10 }}
