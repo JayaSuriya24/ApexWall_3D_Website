@@ -45,30 +45,39 @@ export function FAQ() {
           {FAQS.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
-              <Card 
-                key={index} 
-                className={`p-6 cursor-pointer transition-all duration-300 ${isOpen ? 'border-primary shadow-sm' : 'border-card-border hover:border-foreground/20'}`}
-                onClick={() => setOpenIndex(isOpen ? null : index)}
+              <Card
+                key={index}
+                className={`p-0 transition-all duration-300 ${isOpen ? 'border-primary shadow-sm' : 'border-card-border hover:border-foreground/20'}`}
               >
-                <div className="flex items-center justify-between gap-4">
-                  <h3 className="font-semibold text-foreground text-lg md:text-xl">
+                <h3>
+                  <button
+                    type="button"
+                    id={`faq-q-${index}`}
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-a-${index}`}
+                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                    className="flex w-full items-center justify-between gap-4 rounded-[24px] p-6 text-left font-semibold text-foreground text-lg md:text-xl cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  >
                     {faq.question}
-                  </h3>
-                  <div className="shrink-0 w-8 h-8 rounded-full bg-secondary/30 flex items-center justify-center text-primary">
-                    {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                  </div>
-                </div>
+                    <span className="shrink-0 w-8 h-8 rounded-full bg-secondary/30 flex items-center justify-center text-primary" aria-hidden="true">
+                      {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                    </span>
+                  </button>
+                </h3>
                 
                 <AnimatePresence>
                   {isOpen && (
                     <motion.div
+                      id={`faq-a-${index}`}
+                      role="region"
+                      aria-labelledby={`faq-q-${index}`}
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
-                      <p className="pt-4 text-muted leading-relaxed">
+                      <p className="px-6 pb-6 text-muted leading-relaxed">
                         {faq.answer}
                       </p>
                     </motion.div>

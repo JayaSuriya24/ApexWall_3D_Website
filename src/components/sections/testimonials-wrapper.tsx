@@ -1,39 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Testimonials, INITIAL_TESTIMONIALS, Testimonial } from "./testimonials";
+import { Testimonials, INITIAL_TESTIMONIALS } from "./testimonials";
 import { FeedbackForm } from "./feedback-form";
 
+// Reviews shown publicly are curated in INITIAL_TESTIMONIALS; visitor feedback goes to
+// the business inbox for review instead of being published automatically.
 export function TestimonialsWrapper() {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>(INITIAL_TESTIMONIALS);
-
-  // Load from local storage on mount
-  useEffect(() => {
-    const saved = localStorage.getItem("apexwall-feedback");
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          setTestimonials(parsed);
-        }
-      } catch (e) {
-        console.error("Failed to parse testimonials from local storage", e);
-      }
-    }
-  }, []);
-
-  const handleAddFeedback = (newFeedback: Testimonial) => {
-    setTestimonials((prev) => {
-      const updated = [newFeedback, ...prev];
-      localStorage.setItem("apexwall-feedback", JSON.stringify(updated));
-      return updated;
-    });
-  };
-
   return (
     <>
-      <Testimonials data={testimonials} />
-      <FeedbackForm onSubmitFeedback={handleAddFeedback} />
+      <Testimonials data={INITIAL_TESTIMONIALS} />
+      <FeedbackForm />
     </>
   );
 }

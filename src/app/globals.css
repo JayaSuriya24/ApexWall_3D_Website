@@ -5,7 +5,8 @@
   --foreground: #1C1A17;
   --muted: #6E685E;
   
-  --primary: #C19B76; /* Bronze Accent */
+  --primary: #C19B76; /* Bronze Accent: decoration, borders, icons */
+  --primary-strong: #89633E; /* Darker bronze for text and filled buttons (WCAG AA 4.5:1) */
   --secondary: #E3D5C8;
   --success: #8BA888;
   --highlight-peach: #F5ECE1;
@@ -19,6 +20,7 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
   --color-secondary: var(--secondary);
   --color-success: var(--success);
   --color-highlight: var(--highlight-peach);
@@ -90,4 +92,21 @@
   .lenis.lenis-scrolling iframe {
     pointer-events: none;
   }
+}
+
+@layer base {
+  /* Keep section headings clear of the fixed navbar when jumping to #anchors */
+  :root {
+    --nav-offset: 6rem;
+  }
+  section[id],
+  footer[id] {
+    scroll-margin-top: var(--nav-offset);
+  }
+}
+
+/* The intro animation already played this session (set before hydration in layout.tsx).
+   Unlayered on purpose so it beats the splash's own Tailwind display utility. */
+html[data-splash-seen] [data-splash] {
+  display: none;
 }

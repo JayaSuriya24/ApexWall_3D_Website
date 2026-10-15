@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import Image from "next/image";
 import {
   Download,
   ImagePlus,
@@ -513,8 +514,9 @@ export function WallPreviewEditor() {
                   disabled={busy === "wall"}
                   className="group overflow-hidden rounded-xl border border-card-border bg-card-bg text-left transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50"
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={room.src} alt="" className="aspect-[4/3] w-full object-cover" />
+                  <span className="relative block aspect-[4/3] w-full">
+                    <Image src={room.src} alt="" fill sizes="160px" className="object-cover" />
+                  </span>
                   <span className="block px-2 py-1.5 text-[11px] font-medium text-foreground sm:text-xs">{room.title}</span>
                 </button>
               ))}
@@ -566,7 +568,7 @@ export function WallPreviewEditor() {
                     value={comparePos}
                     onChange={(e) => setComparePos(Number(e.target.value))}
                     aria-label="Before and after divider"
-                    className="min-w-[140px] flex-1 accent-primary"
+                    className="h-10 min-w-[140px] flex-1 cursor-pointer accent-primary"
                   />
                 )}
                 <p className="basis-full text-xs text-muted">
@@ -716,7 +718,7 @@ export function WallPreviewEditor() {
               max={100}
               value={Math.round(opacity * 100)}
               onChange={(e) => setOpacity(Number(e.target.value) / 100)}
-              className="w-full accent-primary"
+              className="h-10 w-full cursor-pointer accent-primary"
             />
           </Field>
         </Step>
@@ -889,7 +891,7 @@ function Step({
       className="flex min-w-0 flex-col gap-3 rounded-[20px] border border-card-border bg-card-bg p-4 transition-opacity disabled:opacity-50 sm:p-5"
     >
       <legend className="float-left mb-1 flex w-full items-center gap-2.5 font-display text-lg font-semibold">
-        <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary font-sans text-xs text-white">
+        <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary-strong font-sans text-xs text-white">
           {number}
         </span>
         {title}

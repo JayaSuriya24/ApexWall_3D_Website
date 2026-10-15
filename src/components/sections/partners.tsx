@@ -45,7 +45,7 @@ export function Partners() {
                 href="https://www.navarc.in/" 
                 target="_blank" 
                 rel="noreferrer"
-                className="inline-flex items-center gap-1 text-primary text-sm font-medium hover:underline mt-2"
+                className="inline-flex min-h-10 items-center gap-1 text-primary-strong text-sm font-medium hover:underline mt-2"
               >
                 Visit Nav-Arc <ArrowUpRight className="w-3 h-3" />
               </a>

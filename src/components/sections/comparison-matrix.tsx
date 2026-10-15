@@ -35,9 +35,9 @@ export function ComparisonMatrix() {
       <div className="mx-auto max-w-5xl flex flex-col items-center text-center">
         
         <h2 className="font-display font-semibold text-4xl md:text-5xl text-foreground mb-4">
-          Comparison Matrix
+          Direct-to-Wall vs. Wallpaper
         </h2>
-        <p className="text-muted text-lg mb-16">Sophisticated Table</p>
+        <p className="text-muted text-lg mb-16">Why printing straight onto the wall outlasts and outperforms wallpaper.</p>
 
         <Card className="w-full p-0 overflow-hidden bg-card-bg rounded-[24px]">
           <div className="overflow-x-auto">
@@ -47,7 +47,7 @@ export function ComparisonMatrix() {
                   <th className="p-6 md:p-8 font-display font-semibold text-xl text-foreground border-b border-card-border w-1/3">
                     Feature
                   </th>
-                  <th className="p-6 md:p-8 font-display font-semibold text-xl text-foreground bg-highlight-peach/50 border-b border-card-border w-1/3 text-center">
+                  <th className="p-6 md:p-8 font-display font-semibold text-xl text-foreground bg-highlight/50 border-b border-card-border w-1/3 text-center">
                     Direct-to-Wall Printing
                   </th>
                   <th className="p-6 md:p-8 font-display font-semibold text-xl text-foreground border-b border-card-border w-1/3 text-center">
@@ -63,7 +63,7 @@ export function ComparisonMatrix() {
                     </td>
                     
                     {/* Highlighted Column */}
-                    <td className="p-6 md:p-8 text-center bg-highlight-peach border-b border-white/50 relative">
+                    <td className="p-6 md:p-8 text-center bg-highlight border-b border-white/50 relative">
                       <div className="flex flex-col items-center justify-center gap-2">
                         <div className="w-8 h-8 rounded-full bg-success/20 flex items-center justify-center mb-1">
                           <Check className="w-5 h-5 text-success" strokeWidth={3} />
