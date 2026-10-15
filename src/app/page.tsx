@@ -6,6 +6,7 @@ import { FloorplanWalkthrough } from "@/components/sections/floorplan-walkthroug
 import { ComparisonMatrix } from "@/components/sections/comparison-matrix";
 import { CostEstimator } from "@/components/sections/cost-estimator";
 import { ProjectGallery } from "@/components/sections/project-gallery";
+import { WallPreviewTeaser } from "@/components/sections/wall-preview-teaser";
 import { HowItWorks } from "@/components/sections/how-it-works";
 import { TestimonialsWrapper } from "@/components/sections/testimonials-wrapper";
 import { FAQ } from "@/components/sections/faq";
@@ -25,6 +26,7 @@ export default function Home() {
         <ComparisonMatrix />
         <CostEstimator />
         <ProjectGallery />
+        <WallPreviewTeaser />
         <HowItWorks />
         <TestimonialsWrapper />
         <FAQ />

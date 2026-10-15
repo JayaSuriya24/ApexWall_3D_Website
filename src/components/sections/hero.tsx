@@ -2,7 +2,9 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { ChevronLeft, ChevronRight, ScanLine } from "lucide-react";
+import { PillButton } from "@/components/ui/pill-button";
 
 const SLIDES = [
   {
@@ -224,6 +226,13 @@ export function Hero() {
         <p className="text-muted text-base md:text-lg">
           Entente technoloqics oentement system is optimized for professional, classic elegance.
         </p>
+        <PillButton asChild variant="primary" className="mt-8 gap-2 w-full sm:w-auto">
+          <Link href="/preview">
+            <ScanLine className="w-4 h-4" aria-hidden="true" />
+            Preview on Your Wall
+          </Link>
+        </PillButton>
+        <p className="mt-3 text-xs text-muted">Free · See any design on a photo of your wall</p>
       </div>
 
     </section>
