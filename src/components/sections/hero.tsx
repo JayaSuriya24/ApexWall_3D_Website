@@ -29,6 +29,12 @@ export function Hero() {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(1);
+  // Bumped on every manual pick so the auto-advance timer restarts, even for the slide already shown
+  const [picks, setPicks] = useState(0);
+  const pickSlide = (index: number) => {
+    setCurrentSlide(index);
+    setPicks((n) => n + 1);
+  };
   const containerRef = useRef<HTMLDivElement>(null);
 
   const nextSlide = () => {
@@ -80,7 +86,7 @@ export function Hero() {
     }, 12000);
 
     return () => clearTimeout(timer);
-  }, [isDragging, currentSlide]);
+  }, [isDragging, currentSlide, picks]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     const step = e.shiftKey ? 20 : 5;
@@ -205,10 +211,15 @@ export function Hero() {
 
           {/* Bronze Slider Handle */}
           <div 
-            className="absolute top-0 bottom-0 w-1 bg-primary z-10 flex items-center justify-center shadow-xl transition-transform duration-75"
+            className="absolute top-0 bottom-0 w-1 bg-primary z-10 shadow-xl transition-transform duration-75"
             style={{ left: `${sliderPosition}%`, transform: "translateX(-50%)" }}
           >
-            <div className="bg-primary-strong text-white text-xs font-medium tracking-wide uppercase px-4 py-2 rounded-full whitespace-nowrap shadow-lg select-none pointer-events-none">
+            {/* Centred on the handle, but anchored to its inner side near the edges so it never gets cut off */}
+            <div
+              className={`absolute top-1/2 -translate-y-1/2 bg-primary-strong text-white text-xs font-medium tracking-wide uppercase px-4 py-2 rounded-full whitespace-nowrap shadow-lg select-none pointer-events-none ${
+                sliderPosition < 25 ? "left-0" : sliderPosition > 75 ? "right-0" : "left-1/2 -translate-x-1/2"
+              }`}
+            >
               {sliderPosition === 50 ? "Before/After" : "Drag to Transform"}
             </div>
           </div>
@@ -229,7 +240,7 @@ export function Hero() {
             {SLIDES.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentSlide(index)}
+                onClick={() => pickSlide(index)}
                 className="group flex h-10 w-10 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 aria-label={`Go to slide ${index + 1}`}
                 aria-current={currentSlide === index}

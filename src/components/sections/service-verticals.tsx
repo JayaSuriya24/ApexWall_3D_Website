@@ -98,11 +98,11 @@ export function ServiceVerticals() {
           <Card className="relative overflow-hidden group min-h-[400px] md:min-h-[500px] border-0 shadow-md flex items-end">
             <Image src="/images/walkthrough_bg.jpg" alt="Real-Size 3D Floorplan Walkthrough" fill sizes="(max-width: 768px) 100vw, 1024px" className="object-cover transition-transform duration-700 group-hover:scale-105" />
             {/* Elegant dark gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/20" />
             
             <div className="relative z-10 p-8 md:p-12 w-full flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
               <div className="flex flex-col gap-3 max-w-2xl">
-                <span className="text-primary font-medium tracking-wider uppercase text-sm">New Premium Service</span>
+                <span className="text-secondary font-medium tracking-wider uppercase text-sm drop-shadow">New Premium Service</span>
                 <h3 className="font-display font-semibold text-3xl md:text-5xl text-white">
                   Real-Size 3D Walkthrough
                 </h3>

@@ -365,12 +365,15 @@ export function WallPreviewEditor() {
     setMode("wall");
     setComparePos(null);
     setBannerVisible(true);
+    // On phones the controls sit below the photo; bring the corners into view.
+    scrollStageIntoView();
   }
 
   function redetect() {
     commit({ ...placement, wallQuad: autoWallQuad() });
     setMode("wall");
     setComparePos(null);
+    scrollStageIntoView();
   }
 
   // Fills the marked wall: scaled to cover and trimmed, like a real mural, never stretched.
@@ -386,6 +389,7 @@ export function WallPreviewEditor() {
     });
     setMode("art");
     setComparePos(null);
+    scrollStageIntoView();
     if (ok) notify("The design now covers the marked wall. Use Undo to go back.");
   }
 
