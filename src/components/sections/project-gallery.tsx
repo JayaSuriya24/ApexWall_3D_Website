@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { useOverlay } from "@/lib/use-overlay";
+import { GALLERY_FILTER_EVENT } from "@/lib/gallery-filter";
 
 const CATEGORIES = ["All", "Residential", "Commercial", "Traditional", "Clinics & Schools", "Kids' Rooms"];
 
@@ -113,6 +114,18 @@ const PROJECTS: Project[] = [
 export function ProjectGallery() {
   const [activeCategory, setActiveCategory] = useState("Residential");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  // Other sections (e.g. the Direct-to-Wall card) can open the gallery on a category.
+  useEffect(() => {
+    const onFilter = (e: Event) => {
+      const category = (e as CustomEvent<string>).detail;
+      if (!CATEGORIES.includes(category)) return;
+      setActiveCategory(category);
+      setOpenIndex(null);
+    };
+    window.addEventListener(GALLERY_FILTER_EVENT, onFilter);
+    return () => window.removeEventListener(GALLERY_FILTER_EVENT, onFilter);
+  }, []);
 
   const filteredProjects = activeCategory === "All" 
     ? PROJECTS 

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { PenTool, PlayCircle } from "lucide-react";
 import { ArchitectVideoModal } from "@/components/ui/architect-video-modal";
+import { showGalleryCategory } from "@/lib/gallery-filter";
 
 export function ServiceVerticals() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
@@ -66,30 +67,44 @@ export function ServiceVerticals() {
             <div className="flex flex-col gap-6">
               
               {/* Top Right: Direct-to-Wall Printing */}
-              <Card className="p-0 overflow-hidden h-[300px] relative group border-0 shadow-md">
+              {/* Links to the gallery: every project there is a direct-to-wall print */}
+              <Card className="p-0 overflow-hidden h-[300px] relative group border-0 shadow-md focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2">
                 <Image src="/images/direct-to-wall.jpg" alt="Direct-to-Wall Printing in action" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                 <div className="absolute inset-0 p-6 flex flex-col items-start justify-end z-10">
                   <h3 className="font-display font-semibold text-2xl text-white drop-shadow-md">
                     Direct-to-Wall <br/> Printing
                   </h3>
+                  <span className="mt-2 text-sm font-medium text-white/90 drop-shadow-md" aria-hidden="true">
+                    See our projects →
+                  </span>
                 </div>
+                <a
+                  href="#gallery"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    showGalleryCategory("All");
+                  }}
+                  aria-label="Direct-to-Wall Printing: see all our projects in the gallery"
+                  className="absolute inset-0 z-20 focus:outline-none"
+                />
               </Card>
 
               {/* Bottom Right: Pattern / Color Swatches */}
               <div className="grid grid-cols-2 gap-6 h-[250px]">
-                <Card className="relative overflow-hidden group border-0 shadow-md">
-                  <Image src="/images/interior-design.png" alt="Interior Design" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-500" />
+                {/* No matching gallery category, so no hover effect that would suggest a link */}
+                <Card className="relative overflow-hidden border-0 shadow-md">
+                  <Image src="/images/interior-design.png" alt="Interior Design" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" />
+                  <div className="absolute inset-0 bg-black/40" />
                   <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-center p-4">
                     <h3 className="font-display font-semibold text-lg md:text-xl text-white leading-tight drop-shadow-md">
                       Interior <br/> Design
                     </h3>
                   </div>
                 </Card>
-                <Card className="relative overflow-hidden group border-0 shadow-md">
-                  <Image src="/images/palette_bg.jpg" alt="Design material swatches" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-500" />
+                <Card className="relative overflow-hidden border-0 shadow-md">
+                  <Image src="/images/palette_bg.jpg" alt="Design material swatches" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" />
+                  <div className="absolute inset-0 bg-black/40" />
                   <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-center p-4">
                     <h3 className="font-display font-semibold text-lg md:text-xl text-white leading-tight drop-shadow-md">
                       Architectural <br/> Modeling
