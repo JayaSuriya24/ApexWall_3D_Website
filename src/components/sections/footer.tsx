@@ -166,7 +166,7 @@ export function Footer() {
         </div>
 
         {/* Footer Bottom Strip */}
-        <div className="flex flex-col md:flex-row items-end justify-between gap-12 border-t border-card-border pt-12">
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-12 border-t border-card-border pt-12">
           
           <div className="flex flex-col gap-2">
             <h4 className="font-semibold text-foreground text-sm uppercase tracking-wider mb-2">Contact details</h4>
@@ -206,6 +206,9 @@ export function Footer() {
 
         </div>
 
+        <p className="mt-12 text-xs text-muted">
+          © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+        </p>
       </div>
     </footer>
   );

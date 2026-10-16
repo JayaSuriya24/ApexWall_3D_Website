@@ -53,6 +53,12 @@ const BENEFITS = [
 
 export function FloorplanWalkthrough() {
   const [activeStep, setActiveStep] = useState(0);
+  // Bumped on every pick so the timer restarts even when the visitor picks the step already shown
+  const [picks, setPicks] = useState(0);
+  const pickStep = (index: number) => {
+    setActiveStep(index);
+    setPicks((n) => n + 1);
+  };
 
   // Restarts whenever the step changes, so a step picked by the visitor stays for the full 4 seconds
   useEffect(() => {
@@ -60,7 +66,7 @@ export function FloorplanWalkthrough() {
       setActiveStep((prev) => (prev + 1) % STAGES.length);
     }, 4000);
     return () => clearTimeout(timer);
-  }, [activeStep]);
+  }, [activeStep, picks]);
 
   return (
     <section id="3d-walkthrough" className="py-24 md:py-32 bg-card-bg px-6 border-y border-card-border overflow-hidden">
@@ -88,11 +94,11 @@ export function FloorplanWalkthrough() {
                 tabIndex={0}
                 aria-pressed={activeStep === index}
                 className={`flex gap-6 rounded-2xl transition-all duration-500 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${activeStep === index ? "opacity-100 translate-x-2" : "opacity-40 hover:opacity-70"}`}
-                onClick={() => setActiveStep(index)}
+                onClick={() => pickStep(index)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
-                    setActiveStep(index);
+                    pickStep(index);
                   }
                 }}
               >
