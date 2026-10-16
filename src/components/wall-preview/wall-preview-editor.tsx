@@ -425,7 +425,10 @@ export function WallPreviewEditor() {
     });
   }
 
-  async function download() {
+  // Saving or sharing the mockup only ever happens from a real click or tap by the visitor:
+  // events dispatched by scripts (isTrusted = false) are ignored.
+  async function download(e: React.MouseEvent) {
+    if (!e.isTrusted) return;
     setBusy("download");
     try {
       const url = URL.createObjectURL(await renderMockup());
@@ -442,7 +445,8 @@ export function WallPreviewEditor() {
     }
   }
 
-  async function share() {
+  async function share(e: React.MouseEvent) {
+    if (!e.isTrusted) return;
     setBusy("share");
     try {
       const file = new File([await renderMockup()], "apexwall-wall-preview.jpg", { type: "image/jpeg" });

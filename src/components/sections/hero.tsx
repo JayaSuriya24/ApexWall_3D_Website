@@ -53,29 +53,20 @@ export function Hero() {
     setSliderPosition(percent);
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  // Pointer events cover mouse, touch and pen. Capturing the pointer keeps the divider
+  // following it even when it moves past the edge of the photo, so it reaches 0% / 100%.
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    e.currentTarget.setPointerCapture(e.pointerId);
+    setIsDragging(true);
+    handleMove(e.clientX);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
     if (isDragging) handleMove(e.clientX);
   };
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (isDragging) handleMove(e.touches[0].clientX);
-  };
-
-  const handleMouseUp = () => setIsDragging(false);
-
-  useEffect(() => {
-    if (isDragging) {
-      window.addEventListener("mouseup", handleMouseUp);
-      window.addEventListener("touchend", handleMouseUp);
-    } else {
-      window.removeEventListener("mouseup", handleMouseUp);
-      window.removeEventListener("touchend", handleMouseUp);
-    }
-    return () => {
-      window.removeEventListener("mouseup", handleMouseUp);
-      window.removeEventListener("touchend", handleMouseUp);
-    };
-  }, [isDragging]);
+  const stopDragging = () => setIsDragging(false);
 
   useEffect(() => {
     if (isDragging) return;
@@ -166,16 +157,11 @@ export function Hero() {
           aria-valuenow={Math.round(sliderPosition)}
           aria-valuetext={`${Math.round(sliderPosition)}% bare wall shown`}
           onKeyDown={handleKeyDown}
-          onMouseDown={(e) => {
-            setIsDragging(true);
-            handleMove(e.clientX);
-          }}
-          onTouchStart={(e) => {
-            setIsDragging(true);
-            handleMove(e.touches[0].clientX);
-          }}
-          onMouseMove={handleMouseMove}
-          onTouchMove={handleTouchMove}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={stopDragging}
+          onPointerCancel={stopDragging}
+          onLostPointerCapture={stopDragging}
         >
           <AnimatePresence mode="wait" initial={false}>
             <motion.div

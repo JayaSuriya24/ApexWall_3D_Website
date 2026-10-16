@@ -38,12 +38,18 @@ export function ServiceVerticals() {
               {/* Elegant dark overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:bg-black/40 transition-colors duration-500" />
               
-              {/* Play Video Icon: on hover/focus, always shown on touch screens (no hover there) */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 pointer-coarse:opacity-100 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300 z-20">
+              {/* Play Video: large centred overlay on hover/focus (mouse and keyboard) */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 pointer-coarse:hidden group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300 z-20">
                 <div className="flex flex-col items-center gap-2">
                   <PlayCircle className="w-16 h-16 text-white drop-shadow-xl" strokeWidth={1} />
                   <span className="text-white font-medium tracking-widest uppercase text-sm drop-shadow-md">Play Video</span>
                 </div>
+              </div>
+
+              {/* Touch screens have no hover: a small badge in the corner, clear of the icon and heading */}
+              <div className="absolute right-4 top-4 z-20 hidden items-center gap-1.5 rounded-full bg-black/50 px-3 py-1.5 text-xs font-medium uppercase tracking-widest text-white backdrop-blur-sm pointer-coarse:flex">
+                <PlayCircle className="w-4 h-4" aria-hidden="true" />
+                Play video
               </div>
 
               <div className="absolute inset-0 p-8 flex flex-col items-center justify-end text-center gap-4 z-10 transition-transform duration-500 group-hover:-translate-y-4">

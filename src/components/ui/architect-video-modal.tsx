@@ -28,7 +28,8 @@ const SLIDES = [
     subtitle: "Stunning edge-to-edge detailing for commercial and residential spaces.",
   },
   {
-    image: "/images/interior-design.png",
+    // Full-screen slide: needs a large photo (interior-design.png is only 574px wide)
+    image: "/images/walkthrough_bg.jpg",
     title: "Bring Bespoke Concepts to Life",
     subtitle: "Turn your most ambitious architectural models into breathtaking reality.",
   },
