@@ -22,6 +22,7 @@ import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 import { PillButton } from "@/components/ui/pill-button";
 import { PreviewStage } from "./preview-stage";
+import { usePhoneVerification } from "@/components/verify/phone-verification";
 import { isConvexQuad, type Quad, type Rect } from "@/lib/wall-preview/geometry";
 import {
   ACCEPT_ATTR,
@@ -96,6 +97,7 @@ export function WallPreviewEditor() {
   const [toast, setToast] = useState<{ id: number; message: string } | null>(null);
   const [dragOver, setDragOver] = useState(false);
   const stageCardRef = useRef<HTMLDivElement>(null);
+  const { verified, requireVerified, recordLead } = usePhoneVerification();
 
   const [thumbs] = useState(() => Object.fromEntries(DESIGNS.map((d) => [d.id, renderDesign(d, 240).toDataURL("image/png")])));
   const [canShareFiles] = useState(() => {
@@ -425,10 +427,63 @@ export function WallPreviewEditor() {
     });
   }
 
-  // Saving or sharing the mockup only ever happens from a real click or tap by the visitor:
-  // events dispatched by scripts (isTrusted = false) are ignored.
-  async function download(e: React.MouseEvent) {
+  // What we note against a verified lead when they save, share or ask for a quote
+  function leadDetails(): Record<string, string> {
+    return {
+      design: art?.title ?? "",
+      ownArtwork: art?.source === "upload" ? "yes" : "no",
+      wall: wallSizeFt ? `${wallSizeFt.width} × ${wallSizeFt.height} ft` : "",
+      artwork: artSize ? `${artSize.width.toFixed(1)} × ${artSize.height.toFixed(1)} ft` : "",
+      shape: placement.shape,
+      surface,
+      ink,
+      estimate: estimate ? formatInr(estimate.total) : "",
+    };
+  }
+
+  // Saving or sharing the mockup only ever happens from a real click or tap by the visitor
+  // (script-dispatched events, isTrusted = false, are ignored), and only for a verified number.
+  function download(e: React.MouseEvent) {
     if (!e.isTrusted) return;
+    requireVerified({
+      title: "Verify your number to download your mockup",
+      actionLabel: "Download mockup",
+      onContinue: () => {
+        recordLead("mockup_download", leadDetails());
+        void saveMockup();
+      },
+    });
+  }
+
+  function share(e: React.MouseEvent) {
+    if (!e.isTrusted) return;
+    requireVerified({
+      title: "Verify your number to share your mockup",
+      actionLabel: "Share mockup",
+      onContinue: () => {
+        recordLead("mockup_share", leadDetails());
+        void shareMockup();
+      },
+    });
+  }
+
+  function askOnWhatsApp(e: React.MouseEvent<HTMLAnchorElement>) {
+    if (verified) {
+      recordLead("whatsapp_quote", leadDetails());
+      return; // the link opens WhatsApp as usual
+    }
+    e.preventDefault();
+    requireVerified({
+      title: "Verify your number to get a quote",
+      actionLabel: "Open WhatsApp",
+      onContinue: () => {
+        recordLead("whatsapp_quote", leadDetails());
+        window.open(whatsappHref, "_blank", "noopener,noreferrer");
+      },
+    });
+  }
+
+  async function saveMockup() {
     setBusy("download");
     try {
       const url = URL.createObjectURL(await renderMockup());
@@ -445,8 +500,7 @@ export function WallPreviewEditor() {
     }
   }
 
-  async function share(e: React.MouseEvent) {
-    if (!e.isTrusted) return;
+  async function shareMockup() {
     setBusy("share");
     try {
       const file = new File([await renderMockup()], "apexwall-wall-preview.jpg", { type: "image/jpeg" });
@@ -837,7 +891,7 @@ export function WallPreviewEditor() {
             </PillButton>
           </div>
           <PillButton asChild variant="secondary" className="w-full">
-            <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
+            <a href={whatsappHref} target="_blank" rel="noopener noreferrer" onClick={askOnWhatsApp}>
               Send details on WhatsApp
             </a>
           </PillButton>

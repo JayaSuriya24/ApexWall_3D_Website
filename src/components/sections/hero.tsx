@@ -178,7 +178,8 @@ export function Hero() {
                 alt="Printed wall art"
                 fill
                 sizes="(max-width: 1152px) 100vw, 1152px"
-                preload={currentSlide === 1}
+                loading="eager"
+                fetchPriority={currentSlide === 1 ? "high" : "auto"}
                 className="object-cover select-none pointer-events-none"
               />
               
@@ -188,7 +189,8 @@ export function Hero() {
                 alt="Bare wall"
                 fill
                 sizes="(max-width: 1152px) 100vw, 1152px"
-                preload={currentSlide === 1}
+                loading="eager"
+                fetchPriority={currentSlide === 1 ? "high" : "auto"}
                 className="object-cover select-none pointer-events-none"
                 style={{ clipPath: `inset(0 calc(100% - ${sliderPosition}%) 0 0)` }}
               />

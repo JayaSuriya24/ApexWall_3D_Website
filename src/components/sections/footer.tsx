@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { PillButton } from "@/components/ui/pill-button";
 import { siteConfig } from "@/config/site";
 import { submitForm } from "@/lib/submit-form";
+import { usePhoneVerification } from "@/components/verify/phone-verification";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -13,23 +15,32 @@ export function Footer() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const { verified, requireVerified, recordLead } = usePhoneVerification();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  // An enquiry is sent with a verified mobile number, so we can always call back.
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setHasError(false);
-
     const form = e.currentTarget;
     const formData = new FormData(form);
+    const fields = {
+      name: String(formData.get("name") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      message: String(formData.get("message") ?? ""),
+    };
+    requireVerified({
+      title: "Verify your number to send your message",
+      actionLabel: "Send message",
+      onContinue: (v) => void send(fields, v.phone, form),
+    });
+  };
 
+  const send = async (fields: { name: string; email: string; message: string }, phone: string, form: HTMLFormElement) => {
+    setIsSubmitting(true);
+    setHasError(false);
     try {
       // Only thank the visitor once the form service has actually accepted the message.
-      await submitForm({
-        _subject: "New Website Enquiry - ApexWall 3D",
-        name: String(formData.get("name") ?? ""),
-        email: String(formData.get("email") ?? ""),
-        message: String(formData.get("message") ?? ""),
-      });
+      await submitForm({ _subject: "New Website Enquiry - ApexWall 3D", ...fields, phone: `${phone} (verified)` });
+      recordLead("contact_form", { name: fields.name, email: fields.email, message: fields.message });
       setIsSubmitted(true);
       form.reset();
     } catch {
@@ -142,6 +153,11 @@ export function Footer() {
                   <PillButton type="submit" variant="outline" className="w-full mt-2" disabled={isSubmitting}>
                     {isSubmitting ? "Sending..." : "Submit"}
                   </PillButton>
+                  <p className="text-xs text-muted text-center">
+                    {verified
+                      ? `We'll reply on your verified number ${verified.masked}.`
+                      : "We'll confirm your mobile number with a one-time code before sending."}
+                  </p>
                 </motion.form>
               ) : (
                 <motion.div 
@@ -207,7 +223,10 @@ export function Footer() {
         </div>
 
         <p className="mt-12 text-xs text-muted">
-          © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+          © {new Date().getFullYear()} {siteConfig.name}. All rights reserved. ·{" "}
+          <Link href="/privacy" className="inline-block py-3 underline hover:text-foreground">
+            Privacy policy
+          </Link>
         </p>
       </div>
     </footer>
